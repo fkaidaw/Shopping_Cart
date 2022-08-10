@@ -30,6 +30,7 @@ public class Project1 {
 
 
 	System.out.println("epic");
+	System.out.println("Amazing");
 
         //bye bye 
         
