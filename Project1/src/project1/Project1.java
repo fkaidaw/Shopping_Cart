@@ -18,7 +18,7 @@ public class Project1 {
         System.out.println("Hello");
         
         System.out.println("epic");
-<<<<<<< Updated upstream
+
         
         //WTF is wrong with this Github
         
@@ -27,11 +27,14 @@ public class Project1 {
         //Lucas branch
 
 	//testing testing 123
-=======
+
 
 	System.out.println("epic");
 
->>>>>>> Stashed changes
+        //bye bye 
+        
+        //sadjfjksfasef
+
     }
     
 }
