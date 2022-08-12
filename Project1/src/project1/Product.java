@@ -9,7 +9,7 @@ package project1;
  * @author lucasspain
  */
 
-//product is an abstract class - can be extended into different categories of products
+//product is an abstract class - can be extended into different categories of products that will be listed on the store
 public abstract class Product {
     
     //encapsulated instance varaiables for a Product object

@@ -11,7 +11,7 @@ package project1;
 
 import java.util.ArrayList;
 
-//class for the shopping cart
+//class for the shopping cart - used to keep track of the products the user will buy
 public class Cart {
     //instance variables
     private ArrayList<Product> inCart;
