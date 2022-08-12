@@ -1,0 +1,46 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package project1;
+
+/**
+ *
+ * @author lucasspain
+ */
+
+import java.util.ArrayList;
+
+//class for Shop
+public class Shop {
+    private Cart cart;
+    private ArrayList<Product> products;
+    
+    //default constructor for a shop - creates an ArrayList of products and a Cart object
+    public Shop() {
+        this.products = new ArrayList();
+        this.cart = new Cart();
+    }
+    
+    //method to search for a product, returns an ArrayList of the products that were found
+    public ArrayList<Product> Search(String query) {
+        
+        ArrayList<Product> searchResult = new ArrayList<Product>();
+        
+        for (Product p : products)
+        {
+            if (p.search(query))
+            {
+                searchResult.add(p);
+            }
+        }
+        
+        return searchResult;
+        
+    }
+    
+    //method to checkout
+    public void Checkout() {
+        
+    }
+}
