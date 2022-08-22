@@ -23,7 +23,7 @@ public class Shop {
     }
     
     //method to start the online shop menu
-    public void Menu() {
+    public void menu() {
         System.out.println("Welcome to the shop!");
         System.out.println("What would you like to do?");
         System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n");
@@ -31,7 +31,7 @@ public class Shop {
     }
     
     //method to search for a product, returns an ArrayList of the products that were found
-    public ArrayList<Product> Search(String query) {
+    public ArrayList<Product> search(String query) {
         
         ArrayList<Product> searchResult = new ArrayList<Product>();
         
@@ -48,7 +48,7 @@ public class Shop {
     }
     
     //method to checkout
-    public void Checkout() {
+    public void checkout() {
         
     }
 }

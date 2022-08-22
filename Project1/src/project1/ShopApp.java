@@ -19,7 +19,7 @@ public class ShopApp {
         Shop shop1 = new Shop();
         
         //display the menu for the shop
-        shop1.Menu();
+        shop1.menu();
         
     }
     
