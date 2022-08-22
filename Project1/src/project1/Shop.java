@@ -10,6 +10,7 @@ package project1;
  */
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //class for Shop
 public class Shop {
@@ -45,6 +46,18 @@ public class Shop {
         
         return searchResult;
         
+    }
+    
+    
+    //method to get username input from user to log them in - need to add try catch here
+    public User login() {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("Please enter your username");
+        String username = scan.nextLine();
+        
+        return new User(username);
+       
     }
     
     //method to checkout

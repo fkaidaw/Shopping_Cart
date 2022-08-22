@@ -12,14 +12,26 @@ package project1;
 //ShopApp class, has the main method
 public class ShopApp {
 
-    
     public static void main(String[] args) {
         
-        //create a shop object
-        Shop shop1 = new Shop();
+        //need a method to check and update this
+        boolean exit = false;
         
-        //display the menu for the shop
-        shop1.menu();
+        while (exit == false)
+        {
+            //create a shop and cart object
+            Shop shop1 = new Shop();
+            Cart cart = new Cart();
+
+            //get user to login
+            User user1 = shop1.login();
+
+            //display the menu for the shop
+            shop1.menu();
+
+            //write the user to the text file
+            user1.writeUsers(); 
+        }
         
     }
     
