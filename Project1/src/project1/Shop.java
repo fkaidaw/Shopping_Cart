@@ -52,10 +52,38 @@ public class Shop {
     }
     
     //method to start the online shop menu
-    public void menu() {
+    public void mainMenu() {
         System.out.println("Welcome to the shop!");
         System.out.println("What would you like to do?");
         System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n");
+        
+        Scanner scan = new Scanner(System.in);
+        
+        int input = scan.nextInt();
+        
+        switch (input) {
+            case 1:
+                displayProducts();
+                break;
+            case 2:
+                break;
+            case 3:
+                System.out.println("Search: ");
+                
+                String searchInput;
+                searchInput = scan.nextLine();
+                search(searchInput);
+                break;
+            case 4:
+                viewCart();
+                break;
+            case 5:
+                checkout();
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
         
     }
     
@@ -95,8 +123,18 @@ public class Shop {
         }
     }
     
+    //method to view the cart, user can either return to menu or continue to checkout from here
+    public void viewCart() {
+        System.out.println(this.cart);
+
+        System.out.println("\n\nWould you like to:\n1.Return to main menu\n2.Checkout");
+        
+        
+    }
+    
     //method to checkout
     public void checkout() {
+
         
     }
 }
