@@ -4,6 +4,8 @@
  */
 package project1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author lucasspain
@@ -13,25 +15,50 @@ package project1;
 public class ShopApp {
 
     public static void main(String[] args) {
+ 
+        Shop shop1 = new Shop();
         
-        //need a method to check and update this
-        boolean exit = false;
+        Scanner scan = new Scanner(System.in);
+
+        //get user to login
+        User user1 = shop1.login();
+
+        //display the menu for the shop
+        shop1.menu();
         
-        while (exit == false)
-        {
-            //create a shop and cart object
-            Shop shop1 = new Shop();
-            Cart cart = new Cart();
-
-            //get user to login
-            User user1 = shop1.login();
-
-            //display the menu for the shop
-            shop1.menu();
-
-            //write the user to the text file
-            user1.writeUsers(); 
+        int input = scan.nextInt();
+        
+        switch (input) {
+            case 1:
+                shop1.displayProducts();
+                break;
+            case 2:
+                break;
+            case 3:
+                System.out.println("Search: ");
+                
+                String searchInput;
+                searchInput = scan.nextLine();
+                shop1.search(searchInput);
+                break;
+            case 4:
+                System.out.println(shop1.getCart());
+                break;
+            case 5:
+                shop1.checkout();
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+                
+            
         }
+
+                    
+
+        //write the user to the text file
+        user1.writeUsers(); 
+
         
     }
     

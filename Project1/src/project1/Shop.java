@@ -14,6 +14,34 @@ import java.util.Scanner;
 
 //class for Shop
 public class Shop {
+
+    /**
+     * @return the cart
+     */
+    public Cart getCart() {
+        return cart;
+    }
+
+    /**
+     * @param cart the cart to set
+     */
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    /**
+     * @return the products
+     */
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    /**
+     * @param products the products to set
+     */
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
     private Cart cart;
     private ArrayList<Product> products;
     
@@ -36,7 +64,7 @@ public class Shop {
         
         ArrayList<Product> searchResult = new ArrayList<Product>();
         
-        for (Product p : products)
+        for (Product p : getProducts())
         {
             if (p.search(query))
             {
@@ -58,6 +86,13 @@ public class Shop {
         
         return new User(username);
        
+    }
+    
+    public void displayProducts() {
+        for (Product p : getProducts())
+        {
+            System.out.println(p);
+        }
     }
     
     //method to checkout

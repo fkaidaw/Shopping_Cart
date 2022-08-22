@@ -37,14 +37,19 @@ public class Cart {
     public String toString() {
         String output = "Cart contents:\n";
         
-        for (Product p : inCart) {
-            output += p.toString();
-            
-            this.total += p.getPrice();
-            
+        if (this.inCart.size() == 0) {
+            output += "Cart is empty";
         }
-        
-        
+        else {
+
+            for (Product p : this.inCart) {
+                output += p.toString();
+
+                this.total += p.getPrice();
+
+            }
+        }
+
         output += "\n\nTotal: $"+this.total;
         
         return output;
