@@ -70,8 +70,9 @@ public class Shop {
             case 3:
                 System.out.println("Search: ");
                 
-                String searchInput;
-                searchInput = scan.nextLine();
+                scan.nextLine();
+                
+                String searchInput = scan.nextLine();
                 search(searchInput);
                 break;
             case 4:

@@ -26,7 +26,6 @@ public class ShopApp {
         //display the menu for the shop
         shop1.mainMenu();
        
-               
         //write the user to the text file
         user1.writeUsers();  
             
