@@ -1,0 +1,4 @@
+Receipt: 
+Product: Apple Manufacturer: Tesla Price: $4.99
+Product: Banana Manufacturer: Tesla Price: $2.99
+

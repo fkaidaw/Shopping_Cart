@@ -92,7 +92,7 @@ public abstract class Product {
             
     //toString method, prints out name, manufacturer, and price
     public String toString() {
-        String output = this.name+" Manufacturer: "+this.manufacturer+" Price: $"+this.price;
+        String output = "Product: " + this.name + " Manufacturer: "+this.manufacturer + " Price: $"+this.price;
         
         return output;
     }

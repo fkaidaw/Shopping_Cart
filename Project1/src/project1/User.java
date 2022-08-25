@@ -79,7 +79,7 @@ public class User {
         }
             
     }
-    
+    // Talk to Lucas about removing the below code
     //method to write users in the hashmap to a text file
     public void writeUsers() {
         
