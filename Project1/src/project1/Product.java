@@ -10,7 +10,7 @@ package project1;
  */
 
 //product is an abstract class - can be extended into different categories of products that will be listed on the store
-public abstract class Product {
+public abstract class Product implements Comparable<Product>{
     
     //encapsulated instance varaiables for a Product object
     private String name;
@@ -95,6 +95,11 @@ public abstract class Product {
         String output = "Product: " + this.name + " Manufacturer: "+this.manufacturer + " Price: $"+this.price;
         
         return output;
+    }
+    
+    @Override
+    public int compareTo(Product p) {
+        return this.getName().compareTo(p.getName());
     }
     
     
