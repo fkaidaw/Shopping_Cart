@@ -79,7 +79,7 @@ public class Shop {
                 scan.nextLine();
                 
                 String searchInput = scan.nextLine();
-                search(searchInput);
+                printProducts(search(searchInput));
                 break;
             case 4:
                 viewCart();
@@ -104,7 +104,6 @@ public class Shop {
             if (p.search(query))
             {
                 searchResult.add(p);
-                System.out.println(p);
             }
         }
         
