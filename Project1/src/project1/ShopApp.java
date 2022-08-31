@@ -54,7 +54,7 @@ public class ShopApp {
         Scanner scan = new Scanner(System.in);
 
         //get user to login
-        User user1 = shop1.login();
+        User user1 = new User();
 
         //display the menu for the shop
         shop1.mainMenu();

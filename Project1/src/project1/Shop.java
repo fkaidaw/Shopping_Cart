@@ -15,6 +15,8 @@ import java.util.Scanner;
 
 //class for Shop
 public class Shop {
+    
+    private Scanner scan = new Scanner(System.in);
 
     /**
      * @return the cart
@@ -63,7 +65,6 @@ public class Shop {
         System.out.println("What would you like to do?");
         System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n");
         
-        Scanner scan = new Scanner(System.in);
         
         int input = scan.nextInt();
         
@@ -110,33 +111,13 @@ public class Shop {
         return searchResult;
         
     }
-    
-    
-    //method to get username input from user to log them in - need to add try catch here
-    public User login() {
-        Scanner scan = new Scanner(System.in);
-        
-        System.out.println("Please enter your username");
-        String username = scan.nextLine();
-        
-        return new User(username);
-       
-    }
-    
-    public void displayProducts() {
-        for (Product p : getProducts())
-        {
-            System.out.println(p);
-        }
-    }
+
     
     //method to view the cart, user can either return to menu or continue to checkout from here
     public void viewCart() {
         System.out.println(this.cart);
 
         System.out.println("\nWould you like to:\n1.Return to main menu\n2.Checkout\n3.Exit");
-        
-        Scanner scan = new Scanner(System.in);
         
         int input;
         
@@ -152,7 +133,7 @@ public class Shop {
                 this.checkout();
                 break;
             case 3:
-                System.out.println("Exiting program");
+                this.exit();
                 break;
             default:
                 System.out.println("Invalid input, please try again");
@@ -184,7 +165,7 @@ public class Shop {
         boolean cont = true;
         int itemNum = 0;
         
-        if (size < 5) 
+        if (size < 5 && size > 0) 
         {
             totalPages = 1;
         }
@@ -192,34 +173,44 @@ public class Shop {
         {
             totalPages = (size / 5);
             
-            if ((size % 5) != 0)
+            if ((size % 5) != 0 && size > 5)
             {
                 totalPages += 1;
             }
         }
         
-        Scanner scan = new Scanner(System.in);
-        
-        
-        
-        while (cont == true) {
+
+        while (cont) {
+            
+            if (size < 1)
+            {
+                currPage = 0;
+            }
             
             System.out.println("Page "+currPage+" of "+totalPages+". "+size+" results.\n");
 
-            for (int i = 0; i < 5; i++) 
+            if (totalPages > 0 && cont == true)
             {
-                if (itemNum < size)
+                for (int i = 0; i < 5; i++) 
                 {
-                    itemNum = i + 1 + currItem;
-                    System.out.println("Item Number: "+itemNum+" "+list.get(i + currItem));
-                }
+                    if (itemNum < size)
+                    {
+                        itemNum = i + 1 + currItem;
+                        System.out.println("Item Number: "+itemNum+" "+list.get(i + currItem));
+                    }
 
+                }
             }
+            else
+            {
+                System.out.println("No results found.");
+            }
+
             
             int input = 0;
             
             do {
-                System.out.println("\nWould you like to:\n1.Purchase an item\n2.View next page\n3.View previous page\n4.Return to main menu\n5.Exit");
+                System.out.println("\nWould you like to:\n1.Purchase an item\n2.View next page\n3.View previous page\n4.Search\n5.Return to main menu\n6.Exit");
 
                 
                 input = scan.nextInt();
@@ -227,42 +218,105 @@ public class Shop {
 
                 switch (input) {
                     case 1:
+                        cont = false;
+                            
+                        this.purchaseItem(list);
                         break;
                     case 2:
                         if (currPage != totalPages)
                         {
                             currPage += 1;
                             currItem += 5;
-                            itemNum -= 5;
+                            
                         }
+                        else
+                        {
+                            System.out.println("\nThere is no next page.");
+                        }
+                        
+                        itemNum -= 5;
                         break;
                     case 3:
-                        if (currPage != 1)
+                        if (currPage > 1)
                         {
                             currPage -= 1;
                             currItem -= 5;
-                            itemNum -= 5;
+
                         }
+                        else
+                        {
+                            System.out.println("\nThere is no previous page.");
+                        }
+                        itemNum -= 5;
 
                         break;
                     case 4:
+                        System.out.println("Search: ");
+                        String searchInput = scan.nextLine();
+                        
+                        cont = false;
+                        
+                        printProducts(search(searchInput));
+                        
+                        break;
+                    case 5:
                         cont = false;
 
                         this.mainMenu();
                         break;
-                    case 5:
-                        System.out.println("Exiting program");
-
+                    case 6:
+                        
                         cont = false;
+                        this.exit();
+                        
                         break;
                     default:
                         System.out.println("Invalid input, please try again");
                         break;
                 }
-            } while (input < 1 || input > 5);
+            } while ((input < 1 || input > 6) && cont == true);
             
         }
             
          
+    }
+    
+    //method to add an item to the cart from the item list
+    public void purchaseItem(ArrayList<Product> list) {
+        
+        int curr = 1;
+        boolean found = false;
+        
+        System.out.println("Please enter the Item Number you would like to add to the cart");
+        
+        int input = scan.nextInt();
+        scan.nextLine();
+        
+        for (Product p : list)
+        {
+            if (curr == input)
+            {
+                this.cart.add(p);
+                
+                System.out.println(p.getName()+" has been added to the cart");
+                
+                found = true;
+            }
+            
+            curr++;
+        }
+        
+        if (found == false)
+        {
+            System.out.println("Item not found.");
+        }
+        
+        this.printProducts(list);
+        
+    }
+    
+    //method to exit the program
+    public void exit() {
+        System.out.println("Exiting program");
     }
 }

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.Scanner;
 
 /**
  *
@@ -21,12 +22,24 @@ public class User {
     //private instance variables for a user object
     private HashMap users;
     private String username;
-    private int points;
+    
+    private Scanner scan = new Scanner(System.in);
+        
+    
+    //method to get username input from user to log them in - need to add try catch here
+    public void login() {
+        
+        System.out.println("Please enter your username");
+        String username = scan.nextLine();
+        
+        this.username = username;
+       
+    }
+    
     
     //constructor method for a user, should check the file to see if the user already exists
-    public User(String username) {
-        this.username = username;
-        this.points = 0;
+    public User() {
+        this.login();
         
         this.readUsers();
   
@@ -63,7 +76,7 @@ public class User {
 
                     if (this.username.equals(key))
                     {
-                        this.points = (Integer)entry.getValue();
+                        
                     }
                 }
 
@@ -83,7 +96,7 @@ public class User {
     //method to write users in the hashmap to a text file
     public void writeUsers() {
         
-        users.put(this.username, this.points);
+        users.put(this.username, 1);
         
         PrintWriter pw = null;
 
@@ -114,26 +127,6 @@ public class User {
         }
         
     }
-    
-    public boolean Discount() {
-        if (this.points >= 100)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    public void decreasePoints(int p) {
-        this.points -= p;
-    }
-    
-    public void increasePoints(int p) {
-        this.points += p;
-    }
-    
-    //if user has enough points give discount ?
+
     
 }
