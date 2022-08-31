@@ -1,0 +1,5 @@
+Chicken Nibbles,Tegels,12.99,1000
+Chicken Breast,Tegels,14.99,1000
+Chicken Drumsticks,Bostocks,12.99,1200
+Beef Mince, Farmland,7.99,1000
+Sirloin Steak,Harmony Taupo,20.50,360
