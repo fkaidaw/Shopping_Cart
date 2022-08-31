@@ -4,6 +4,7 @@
  */
 package project1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,41 +17,28 @@ public class ShopApp {
 
     public static void main(String[] args) {
         
-        //test
-        Product p1 = new Test("Apple", "Tesla", 4.99); 
-        Product p2 = new Test("Banana", "Tesla", 2.99);
-        Product p3 = new Test("Banana", "Tesla", 2.99);
-        Product p4 = new Test("Banana", "Tesla", 2.99);
-        Product p5 = new Test("Banana", "Tesla", 2.99);
-        Product p6 = new Test("Banana", "Tesla", 2.99);
-        Product p7 = new Test("Banana", "Tesla", 2.99);
-        Product p8 = new Test("Banana", "Tesla", 2.99);
-        Product p9 = new Test("Banana", "Tesla", 2.99);
-        Product p10 = new Test("Banana", "Tesla", 2.99);
-        Product p11 = new Test("Banana", "Tesla", 2.99);
-        Product p12 = new Test("Banana", "Tesla", 2.99);
-        Product p13 = new Test("Banana", "Tesla", 2.99);
-        Product p14 = new Test("Aapple", "Tesla", 2.99);
+        ArrayList<Product> productList = new ArrayList<Product>();
 
+        MeatReader meatReader = new MeatReader();
+        ArrayList<Product> meatList = meatReader.getMeats();
+        productList.addAll(meatList);
+        
+        FruitReader fruitReader = new FruitReader();
+        ArrayList<Product> fruitList = fruitReader.getFruit();
+        productList.addAll(fruitList);
+        
+        VegetableReader vegetableReader = new VegetableReader();
+        ArrayList<Product> vegetableList = vegetableReader.getVegetable();
+        productList.addAll(vegetableList);
+        //test
 
         Shop shop1 = new Shop();
         
-        shop1.addProducts(p1);
-        shop1.addProducts(p2);
-        shop1.addProducts(p3);
-        shop1.addProducts(p4);
-        shop1.addProducts(p5);
-        shop1.addProducts(p6);
-        shop1.addProducts(p7);
-        shop1.addProducts(p8);
-        shop1.addProducts(p9);
-        shop1.addProducts(p10);
-        shop1.addProducts(p11);
-        shop1.addProducts(p12);
-        shop1.addProducts(p13);
-        shop1.addProducts(p14);       
-        
-        
+        for (int i = 0; i < productList.size(); i++)
+        {
+          shop1.addProducts(productList.get(i));  
+        }
+       
         Scanner scan = new Scanner(System.in);
 
         //get user to login

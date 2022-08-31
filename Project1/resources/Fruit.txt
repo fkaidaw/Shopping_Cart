@@ -1,0 +1,5 @@
+Banana,Dole,3.49
+Red Apple,Royal Gala,2.99
+Green Apple,Granny Smith,2.99
+Mango,Fresh Max,5.99
+Grapes,Australian Grapes,13.99
