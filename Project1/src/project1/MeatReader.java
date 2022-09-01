@@ -12,46 +12,31 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fahim
+ * @author lucasspain & Fahim 
  */
+// file reader for meat 
 public class MeatReader
 {
+    //gets meat from meat file 
      public ArrayList<Product> getMeats()
     {
         ArrayList<Product> meatList = new ArrayList<Product>();
         
-        String fileName = "";
-	try
-	{
-            FileReader fr = new FileReader("./resources/Meat.txt");
-            BufferedReader inputStream = new BufferedReader(fr);
+        String fileName = "./resources/Meat.txt";
+        FileIO fileIO = new FileIO();
+        ArrayList<String> fileLines = fileIO.readFile(fileName);
 
-            String line = null;
-            line = inputStream.readLine();
+        for (int i = 0; i < fileLines.size(); i++)
+        {
+            String[] values = fileLines.get(i).split(",", 4);
+            String name = values[0];
+            String manufacturer = values[1];
+            double price = Double.parseDouble(values[2]);
+            int weight = Integer.parseInt(values[3]);
 
-            while(line != null)
-            {
-                String[] values = line.split(",", 4);
-                String name = values[0];
-                String manufacturer = values[1];
-                double price = Double.parseDouble(values[2]);
-                int weight = Integer.parseInt(values[3]);
-                
-                Meat meat = new Meat(name, manufacturer, price, weight);
-                meatList.add(meat);
-                
-                line = inputStream.readLine();
-            }
-            inputStream.close(); 
-	}
-	catch(FileNotFoundException e)
-	{
-            System.out.println("File not found.");
-	}
-	catch(IOException e)
-	{
-            System.out.println("Error reading from file" + fileName);
-	}
+            Meat meat = new Meat(name, manufacturer, price, weight);
+            meatList.add(meat);
+        }
         return meatList;
     }
 }

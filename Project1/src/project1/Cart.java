@@ -6,7 +6,7 @@ package project1;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 import java.util.ArrayList;
@@ -41,7 +41,13 @@ public class Cart {
     public void add(Product p) {
         this.inCart.add(p);
     }
-    
+
+    //method to get the cart
+    public ArrayList<Product> getInCart()
+    {
+        return inCart;
+    }
+
     //method to remove a product from the cart
     public void remove(Product p) {
         this.inCart.remove(p);
@@ -65,10 +71,8 @@ public class Cart {
         }
 
         output += "\n\nTotal: $"+this.getTotal();
+        this.setTotal(0);
         
         return output;
-        
     }
-    
-    
 }

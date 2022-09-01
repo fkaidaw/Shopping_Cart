@@ -6,7 +6,7 @@ package project1;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 import java.util.ArrayList;
@@ -52,85 +52,48 @@ public class Shop {
     
     private Cart cart;
     private ArrayList<Product> products;
-    private User user;
     
     //default constructor for a shop - creates an ArrayList of products and a Cart object
     public Shop() {
         this.products = new ArrayList();
         this.cart = new Cart();
-        
-        this.user = new User();
     }
     
     //method to start the online shop menu
     public void mainMenu() {
+        System.out.println("\nWelcome to the shop!");
+        System.out.println("What would you like to do?");
+        System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n");
         
-        int input = 0;
-        boolean valid = true;
         
-        do {
-
-            System.out.println("\nWelcome to the shop!");
-            System.out.println("What would you like to do?");
-            System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n6.View Profile\n7.Exit");
-            
-            valid = true;
-            
-            try {
-
-                input = scan.nextInt();
+        int input = scan.nextInt();
+        
+        switch (input) 
+        {
+            case 1:
+                printProducts(this.products);
+                break;
+            case 2:
+                selectCategory();
+                break;
+            case 3:
+                System.out.println("Search: ");
                 
-                switch (input) {
-                    case 1:
-                        printProducts(this.products);
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        System.out.println("Search: ");
-
-                        scan.nextLine();
-
-                        String searchInput = scan.nextLine();
-                        printProducts(search(searchInput));
-                        break;
-                    case 4:
-                        viewCart();
-                        break;
-                    case 5:
-                        checkout();
-                        break;
-                    case 6:
-                        int next = this.user.displayUser();
-
-                        if (next == 1)
-                        {
-                            this.mainMenu();
-                        }
-                        else
-                        {
-                            this.exit();
-                        }
-
-                        break;
-                    case 7:
-                        this.exit();
-                        break;
-                    default:
-                        System.out.println("Invalid input");
-                        break;
-                }
-
-            } catch (Exception e)
-            {
-                System.out.println("Invalid input. Please try again.");
-
-                scan.next();
-                valid = false;
-            }
-        } while ((input > 7 || input < 1) || valid == false);
-        
-    
+                scan.nextLine();
+                
+                String searchInput = scan.nextLine();
+                printProducts(search(searchInput));
+                break;
+            case 4:
+                viewCart();
+                break;
+            case 5:
+                checkout();
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
     }
     
     //method to search for a product, returns an ArrayList of the products that were found
@@ -157,46 +120,51 @@ public class Shop {
 
         System.out.println("\nWould you like to:\n1.Return to main menu\n2.Checkout\n3.Exit");
         
-        int input = 0;
-        boolean valid = true;
+        int input;
         
         do {
-            
-            try {
-            input = scan.nextInt();
-            scan.nextLine();
-
-            switch (input) {
-                case 1:
-                    this.mainMenu();
-                    break;
-                case 2:
-                    this.checkout();
-                    break;
-                case 3:
-                    this.exit();
-                    break;
-                default:
-                    System.out.println("Invalid input, please try again");
-                    break;
-
-                }
-            } catch (Exception e)
-            {
-                System.out.println("Invalid input. Please try again.");
+        input = scan.nextInt();
+        scan.nextLine();
+        
+        switch (input) {
+            case 1:
+                this.mainMenu();
+                break;
+            case 2:
+                this.checkout();
+                break;
+            case 3:
+                this.exit();
+                break;
+            default:
+                System.out.println("Invalid input, please try again");
+                break;
                 
-                scan.next();
-                valid = false;
             }
-
         } while (input < 1 || input > 3);
         
    
     }
     
+    //method to checkout
+    public void checkout() 
+    {
+       Receipt receipt = new Receipt();
+       
+       ArrayList<Product> cartProducts = cart.getInCart();
+       
+        for (int i = 0; i < cartProducts.size(); i++)
+        {
+            receipt.addProduct(cartProducts.get(i));
+        }
 
+       System.out.println(cart);
+       receipt.printToFile(cart.toString());
+    }
+    
     //method to print products in an arraylist in pages of 5 items, sorted alphabetically
-    public void printProducts(ArrayList<Product> list) {
+    public void printProducts(ArrayList<Product> list) 
+    {
         
         Collections.sort(list);
         
@@ -248,86 +216,75 @@ public class Shop {
                 System.out.println("No results found.");
             }
 
+            
             int input = 0;
             
             do {
+                System.out.println("\nWould you like to:\n1.Purchase an item\n2.View next page\n3.View previous page\n4.Search\n5.Return to main menu\n6.Exit");
+
                 
-                try {
-                    
-                    System.out.println("\nWould you like to:\n1.Purchase an item\n2.View next page\n3.View previous page\n4.Search\n5.Return to main menu\n6.Exit\n");
+                input = scan.nextInt();
+                scan.nextLine();
 
-
-                    input = scan.nextInt();
-                    scan.nextLine();
-
-                    switch (input) {
-                        case 1:
-                            cont = false;
-
-                            this.purchaseItem(list);
-                            break;
-                        case 2:
-                            if (currPage != totalPages)
-                            {
-                                currPage += 1;
-                                currItem += 5;
-
-                            }
-                            else
-                            {
-                                System.out.println("\nThere is no next page.");
-                            }
-
-                            itemNum -= 5;
+                switch (input) {
+                    case 1:
+                        cont = false;
                             
-                            break;
-                        case 3:
-                            if (currPage > 1)
-                            {
-                                currPage -= 1;
-                                currItem -= 5;
-
-                            }
-                            else
-                            {
-                                System.out.println("\nThere is no previous page.");
-                            }
-                            itemNum -= 5;
-
-                            break;
-                        case 4:
-                            System.out.println("Search: ");
-                            String searchInput = scan.nextLine();
-
-                            cont = false;
-
-                            printProducts(search(searchInput));
-
-                            break;
-                        case 5:
-                            cont = false;
+                        this.purchaseItem(list);
+                        break;
+                    case 2:
+                        if (currPage != totalPages)
+                        {
+                            currPage += 1;
+                            currItem += 5;
                             
-                            this.mainMenu();
-                            break;
-                        case 6:
+                        }
+                        else
+                        {
+                            System.out.println("\nThere is no next page.");
+                        }
+                        
+                        itemNum -= 5;
+                        break;
+                    case 3:
+                        if (currPage > 1)
+                        {
+                            currPage -= 1;
+                            currItem -= 5;
 
-                            cont = false;
-                            this.exit();
+                        }
+                        else
+                        {
+                            System.out.println("\nThere is no previous page.");
+                        }
+                        itemNum -= 5;
 
-                            break;
-                        default:
-                            System.out.println("Invalid input, please try again");
-                            break;
-                    }
-                } catch (Exception e)
-                {
-                    cont = true;
-                    System.out.println("Invalid input. Please try again");
-                    
-                    scan.next();
+                        break;
+                    case 4:
+                        System.out.println("Search: ");
+                        String searchInput = scan.nextLine();
+                        
+                        cont = false;
+                        
+                        printProducts(search(searchInput));
+                        
+                        break;
+                    case 5:
+                        cont = false;
+
+                        this.mainMenu();
+                        break;
+                    case 6:
+                        
+                        cont = false;
+                        this.exit();
+                        
+                        break;
+                    default:
+                        System.out.println("Invalid input, please try again");
+                        break;
                 }
-
-            } while ((input < 1 || input > 6) || cont == true);
+            } while ((input < 1 || input > 6) && cont == true);
             
         }
             
@@ -339,25 +296,11 @@ public class Shop {
         
         int curr = 1;
         boolean found = false;
-        boolean valid = true;
         
-        int input = 0;
+        System.out.println("Please enter the Item Number you would like to add to the cart");
         
-        try {
-            
-            valid = true;
-                    
-            System.out.println("Please enter the Item Number you would like to add to the cart");
-
-            input = scan.nextInt();
-            scan.nextLine();
-            
-        } catch (Exception e)
-        {
-            System.out.println("Invalid input. Please try again.");
-            valid = false;
-        }
-
+        int input = scan.nextInt();
+        scan.nextLine();
         
         for (Product p : list)
         {
@@ -382,18 +325,66 @@ public class Shop {
         
     }
     
+    //Select category between meat, fruit or vegetable
+    public void selectCategory()
+    {
+        System.out.println("Categories");
+        System.out.println("1.Meat\n2.Fruit\n3.Vegetable\n4.Return to main menu\n5.Exit\n");
+        
+        int input = scan.nextInt();
+        
+        switch (input) 
+        {
+            case 1:
+                ArrayList<Product> meatList = new ArrayList<Product>(); 
+                for (int i = 0; i < this.products.size(); i++)
+                {
+                    Product product = this.products.get(i);
+                    if (product instanceof Meat)
+                    {
+                        meatList.add(product);
+                    }
+                }
+                printProducts(meatList);
+                break;
+            case 2:
+                ArrayList<Product> fruitList = new ArrayList<Product>(); 
+                for (int i = 0; i < this.products.size(); i++)
+                {
+                    Product product = this.products.get(i);
+                    if (product instanceof Fruit)
+                    {
+                        fruitList.add(product);
+                    }
+                }
+                printProducts(fruitList);
+                break;
+            case 3:
+                ArrayList<Product> vegetabableList = new ArrayList<Product>(); 
+                for (int i = 0; i < this.products.size(); i++)
+                {
+                    Product product = this.products.get(i);
+                    if (product instanceof Vegetable)
+                    {
+                        vegetabableList.add(product);
+                    }
+                }
+                printProducts(vegetabableList);
+                break;
+            case 4:
+                this.mainMenu();
+                break;
+            case 5:
+                this.exit();
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
+    }
+    
     //method to exit the program
     public void exit() {
         System.out.println("Exiting program");
-        user.save();
     }
-    
-    //method to checkout the items currently in cart
-    public void checkout() {
-        
-        System.out.println("\nthis is a test of the checkout method");
-
-        
-    }
-    
 }

@@ -1,4 +1,6 @@
-Receipt: 
-Product: Apple Manufacturer: Tesla Price: $4.99
-Product: Banana Manufacturer: Tesla Price: $2.99
+Cart contents:
+Product: Aubergine Manufacturer: Countdown Price: $6.99
+Product: Chicken Breast Manufacturer: Tegels Price: $14.99
 
+
+Total: $21.98
