@@ -18,10 +18,26 @@ import java.util.Scanner;
 
 //class for user login in the shop app, users are stored in a hashmap that is read from a file
 public class User {
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
     
     //private instance variables for a user object
     private HashMap users;
     private String username;
+    private int id;
+    private FileIO fileio = new FileIO();
     
     private Scanner scan = new Scanner(System.in);
         
@@ -32,96 +48,96 @@ public class User {
         System.out.println("Please enter your username");
         String username = scan.nextLine();
         
-        this.username = username;
+        this.setUsername(username);
        
     }
     
     
     //constructor method for a user, should check the file to see if the user already exists
     public User() {
+        boolean exists = false;
+        
         this.login();
         
-        this.readUsers();
+        this.users = this.fileio.readUsers();
+        
+        Set eSet = users.entrySet();
+        Iterator it = eSet.iterator();
+
+        while (it.hasNext())
+        {
+            Map.Entry entry = (Map.Entry) it.next();
+            String key = (String) entry.getKey();
+            
+            if (key.equalsIgnoreCase(this.username))
+            {                  
+                exists = true;
+                this.id = (Integer)entry.getValue();
+            }
+            
+        }
+        
+        if (exists == false)
+        {
+            this.id = users.size();
+            users.put(this.username, users.size());
+        }
+
   
 }
-    //method to read the users from a text file into a hashmap
-    public void readUsers() {
+    
+    public int displayUser() {
+        System.out.println("User Information:");
+        System.out.println("Username: "+this.getUsername()+" User ID: "+this.id);
+        System.out.println("\nLast Order:");
         
-        this.users = new HashMap();
+        this.getLastOrder();
+
+        boolean valid = true;
         
-        try {
-            FileReader fr = new FileReader("./resources/shop_users.txt"); 
-            BufferedReader inputStream = new BufferedReader(fr);
+        int input = 0;
+        
+        do {
+         
+        System.out.println("\nWould you like to:\n1.Return to main menu\n2.Exit");
+            
+            valid = true;
+            
+            try {
 
-            String line = null;
+                input = scan.nextInt();
 
-            while ((line=inputStream.readLine())!=null)
-            {
-                String[] split = line.split(" ");
+                switch (input) {
+                    case 1:
+                        return 1;
+                    case 2:
+                        return 2;
+                    default:
+                        System.out.println("Invalid input");
+                        valid = false;
 
-                String name = split[0].trim();
-                int score = Integer.parseInt(split[1].trim());
-
-                users.put(name, score);
-            }
-                
-                Set eSet = users.entrySet();
-                Iterator it = eSet.iterator();
-                
-                while (it.hasNext())
-                {
-                    Map.Entry entry = (Map.Entry) it.next();
-                    String key = (String) entry.getKey();
-
-
-                    if (this.username.equals(key))
-                    {
-                        
-                    }
                 }
-
-            
-            inputStream.close();
-   
-        }
-        catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (IOException e) {
-            System.out.println("Error reading from file");
-        }
-            
-    }
-    //method to write users in the hashmap to a text file
-    public void writeUsers() {
-        
-        users.put(this.username, 1);
-        
-        PrintWriter pw = null;
-
-        try {
-            pw = new PrintWriter(new FileOutputStream("./resources/shop_users.txt"));
-
-            Set eSet = users.entrySet();
-            Iterator it = eSet.iterator();
-            
-            while (it.hasNext())
+            } catch (Exception e)
             {
-                Map.Entry entry = (Map.Entry) it.next();
-                
-                String key = (String) entry.getKey();
-                Integer value = (Integer) entry.getValue();
-                
-                pw.write(key+" "+value);
-                pw.write("\n");
-
-            }
-
-            pw.close();
-        }
-        catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+                System.out.println("Invalid input. Please try again.");
+                scan.next();
+            }   
+        } while (input < 1 || input > 2 || valid == false);
+        return 2;
+        
+        
+    }
+    
+    //method to get the users last order
+    public void getLastOrder() {
+        this.fileio.userLastOrder(this.getUsername());
+    }
+    
+    //method to save the program users to a text file
+    public void save() {
+        
+        this.fileio.writeUsers(this.users);
     }
 
+    
 }

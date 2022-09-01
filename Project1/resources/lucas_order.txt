@@ -1,0 +1,4 @@
+Cart contents:
+Cart is empty
+
+Total: $0.0

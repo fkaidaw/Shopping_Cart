@@ -52,48 +52,86 @@ public class Shop {
     
     private Cart cart;
     private ArrayList<Product> products;
+    private User user;
     
     //default constructor for a shop - creates an ArrayList of products and a Cart object
     public Shop() {
         this.products = new ArrayList();
         this.cart = new Cart();
+        
+        this.user = new User();
     }
     
     //method to start the online shop menu
-    public void mainMenu() {
-        System.out.println("\nWelcome to the shop!");
-        System.out.println("What would you like to do?");
-        System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n");
+   public void mainMenu() {
         
+        int input = 0;
+        boolean valid = true;
         
-        int input = scan.nextInt();
-        
-        switch (input) 
-        {
-            case 1:
-                printProducts(this.products);
-                break;
-            case 2:
-                selectCategory();
-                break;
-            case 3:
-                System.out.println("Search: ");
+        do {
+
+            System.out.println("\nWelcome to the shop!");
+            System.out.println("What would you like to do?");
+            System.out.println("1.View all items\n2.Select Category\n3.Search\n4.View Cart\n5.Checkout\n6.View Profile\n7.Exit");
+            
+            valid = true;
+            
+            try {
+
+                input = scan.nextInt();
                 
-                scan.nextLine();
-                
-                String searchInput = scan.nextLine();
-                printProducts(search(searchInput));
-                break;
-            case 4:
-                viewCart();
-                break;
-            case 5:
-                checkout();
-                break;
-            default:
-                System.out.println("Invalid input");
-                break;
-        }
+                switch (input) {
+                    case 1:
+                        printProducts(this.products);
+                        break;
+                    case 2:
+                        selectCategory();
+                        break;
+                    case 3:
+                        System.out.println("Search: ");
+
+                        scan.nextLine();
+
+                        String searchInput = scan.nextLine();
+                        printProducts(search(searchInput));
+                        break;
+                    case 4:
+                        viewCart();
+                        break;
+                    case 5:
+                        checkout();
+                        break;
+                    case 6:
+                        int next = this.user.displayUser();
+
+                        if (next == 1)
+                        {
+                            this.mainMenu();
+                        }
+                        else
+                        {
+                            this.exit();
+                        }
+
+                        break;
+                    case 7:
+                        this.exit();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+
+            } catch (Exception e)
+            {
+                System.out.println("Invalid input. Please try again.");
+
+                scan.next();
+                valid = false;
+            }
+        } while ((input > 7 || input < 1) || valid == false);
+        
+    
     }
     
     //method to search for a product, returns an ArrayList of the products that were found
@@ -149,17 +187,66 @@ public class Shop {
     //method to checkout
     public void checkout() 
     {
-       Receipt receipt = new Receipt();
-       
-       ArrayList<Product> cartProducts = cart.getInCart();
-       
-        for (int i = 0; i < cartProducts.size(); i++)
+        if (this.cart.getInCart().size() > 0)
         {
-            receipt.addProduct(cartProducts.get(i));
-        }
+            Receipt receipt = new Receipt();
 
-       System.out.println(cart);
-       receipt.printToFile(cart.toString());
+            ArrayList<Product> cartProducts = cart.getInCart();
+
+             for (int i = 0; i < cartProducts.size(); i++)
+             {
+                 receipt.addProduct(cartProducts.get(i));
+             }
+
+            System.out.println(cart);
+            receipt.printToFile(cart.toString());
+
+            receipt.saveOrder(this.user.getUsername(), cart.toString());
+
+            int input = 0;
+            boolean cont = false;
+
+            System.out.println("Would you like to:\n1.Return to main menu\n2.Exit");
+
+            do {
+
+                cont = false;
+
+                try {
+                    input = scan.nextInt();
+
+                    switch (input) {
+                        case 1:
+                            mainMenu();
+                            break;
+                        case 2:
+                            exit();
+                            break;
+                        default:
+                            System.out.println("Invalid input");
+                            break;
+                    }
+
+                } catch (Exception e)
+                {
+                    System.out.println("Invalid input. Please try again.");
+
+                    scan.next();
+                    cont = true;
+
+                }
+            } while (input < 1 || input > 2 || cont == true);
+
+        }
+        
+        else
+        {
+            System.out.println("Cart is empty. Returning to menu");
+            
+            mainMenu();
+        }
+        
+ 
     }
     
     //method to print products in an arraylist in pages of 5 items, sorted alphabetically
@@ -220,7 +307,7 @@ public class Shop {
             int input = 0;
             
             do {
-                System.out.println("\nWould you like to:\n1.Purchase an item\n2.View next page\n3.View previous page\n4.Search\n5.Return to main menu\n6.Exit");
+                System.out.println("\nWould you like to:\n1.Purchase an item\n2.View next page\n3.View previous page\n4.Search\n5.View Cart\n6.Checkout\n7.Return to main menu\n8.Exit");
 
                 
                 input = scan.nextInt();
@@ -270,11 +357,17 @@ public class Shop {
                         
                         break;
                     case 5:
+                        viewCart();
+                        break;
+                    case 6:
+                        checkout();
+                        break;
+                    case 7:
                         cont = false;
 
                         this.mainMenu();
                         break;
-                    case 6:
+                    case 8:
                         
                         cont = false;
                         this.exit();
@@ -284,7 +377,7 @@ public class Shop {
                         System.out.println("Invalid input, please try again");
                         break;
                 }
-            } while ((input < 1 || input > 6) && cont == true);
+            } while ((input < 1 || input > 8) && cont == true);
             
         }
             

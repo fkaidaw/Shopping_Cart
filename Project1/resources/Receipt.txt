@@ -1,6 +1,5 @@
 Cart contents:
 Product: Aubergine Manufacturer: Countdown Price: $6.99
-Product: Chicken Breast Manufacturer: Tegels Price: $14.99
 
 
-Total: $21.98
+Total: $6.99

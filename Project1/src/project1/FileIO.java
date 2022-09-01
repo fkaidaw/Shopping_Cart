@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -127,6 +128,75 @@ public class FileIO {
         catch (IOException e) {
             System.out.println("Error reading from file");
         }
+    }
+    
+        public ArrayList<String> readFile(String fileName)
+    {
+        ArrayList<String> linesList = new ArrayList<String>();
+        String line = null;
+        
+	try
+	{
+            FileReader fr = new FileReader(fileName);
+            BufferedReader inputStream = new BufferedReader(fr);
+
+            line = inputStream.readLine();
+            
+            while(line != null)
+            {
+                linesList.add(line);
+                line = inputStream.readLine();
+            }
+            inputStream.close(); 
+	}
+	catch(FileNotFoundException e)
+	{
+            System.out.println("File not found.");
+	}
+	catch(IOException e)
+	{
+            System.out.println("Error reading from file" + fileName);
+	}
+        return linesList;
+    }
+        
+    // print the list to text file 
+    public void printReceipt(String receipt)
+    {
+	PrintWriter pw = null;
+	try
+	{
+            pw = new PrintWriter(new FileOutputStream("./resources/Receipt.txt"));
+            pw.println(receipt);
+            System.out.println("Items purchased.");
+            System.out.println("... written to Receipt.txt.");
+            pw.close();
+	} 
+	catch(FileNotFoundException e)
+	{	
+            System.out.println(e.getMessage());
+	}
+    }
+    
+    //saves a users most recent order
+    public void saveUserOrder(String username, String receipt) {
+        
+        String fileName = "./resources/"+username+"_order.txt";
+        
+        PrintWriter pw = null;
+	try
+	{
+            pw = new PrintWriter(new FileOutputStream(fileName));
+            pw.println(receipt);
+
+            pw.close();
+	} 
+	catch(FileNotFoundException e)
+	{	
+            System.out.println(e.getMessage());
+	}
+        
+        
     }
     
 }

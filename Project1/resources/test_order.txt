@@ -1,1 +1,5 @@
-last order test
+Cart contents:
+Product: Aubergine Manufacturer: Countdown Price: $6.99
+
+
+Total: $6.99

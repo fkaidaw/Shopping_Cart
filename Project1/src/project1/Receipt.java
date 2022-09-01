@@ -19,6 +19,8 @@ public class Receipt
     // list of products
     ArrayList<Product> productsList = new ArrayList<Product>();
     
+    private FileIO fileio = new FileIO();
+    
     // function to print to text file 
     
 // function to add to the list
@@ -44,37 +46,13 @@ public class Receipt
         }
         return output;
     }
-
-    // print the list to text file 
-    public void printToFile(Receipt receipt)
-    {
-	PrintWriter pw = null;
-	try
-	{
-            pw = new PrintWriter(new FileOutputStream("./resources/Receipt.txt"));
-            pw.println(receipt);
-            System.out.println("... written to out.txt.");
-            pw.close();
-	} 
-	catch(FileNotFoundException e)
-	{	
-            System.out.println(e.getMessage());
-	}
-    }
-      // print the list to text file 
+    
     public void printToFile(String receipt)
     {
-	PrintWriter pw = null;
-	try
-	{
-            pw = new PrintWriter(new FileOutputStream("./resources/Receipt.txt"));
-            pw.println(receipt);
-            System.out.println("... written to out.txt.");
-            pw.close();
-	} 
-	catch(FileNotFoundException e)
-	{	
-            System.out.println(e.getMessage());
-	}
+        fileio.printReceipt(receipt);
+    }
+    
+    public void saveOrder(String username, String receipt) {
+        fileio.saveUserOrder(username, receipt);
     }
 }
