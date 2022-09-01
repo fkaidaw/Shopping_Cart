@@ -1,6 +1,6 @@
 Cart contents:
-Product: Broccoli Manufacturer: Countdown Price: $2.49
-Product: Broccoli Manufacturer: Countdown Price: $2.49
+Product: Aubergine Manufacturer: Countdown Price: $6.99
+Product: Chicken Breast Manufacturer: Tegels Price: $14.99
 
 
-Total: $4.98
+Total: $21.98

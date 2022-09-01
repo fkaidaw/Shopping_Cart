@@ -33,7 +33,7 @@ public class FileIO {
             while(line != null)
             {
                 linesList.add(line);
-                line += inputStream.readLine();
+                line = inputStream.readLine();
             }
             inputStream.close(); 
 	}
