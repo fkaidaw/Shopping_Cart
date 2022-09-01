@@ -75,8 +75,10 @@ public class User {
     public int displayUser() {
         System.out.println("User Information:");
         System.out.println("Username: "+this.username+" User ID: "+this.id);
-
+        System.out.println("\nLast Order:");
         
+        this.getLastOrder();
+
         boolean valid = true;
         
         int input = 0;
@@ -112,6 +114,12 @@ public class User {
         
     }
     
+    //method to get the users last order
+    public void getLastOrder() {
+        this.fileio.userLastOrder(this.username);
+    }
+    
+    //method to save the program users to a text file
     public void save() {
         
         this.fileio.writeUsers(this.users);

@@ -101,4 +101,32 @@ public class FileIO {
         
     }
     
+    //method to get a users last order from a text file if it exists
+    public void userLastOrder(String username)
+    {
+        
+        String fileName = "./resources/"+username+"_order.txt";
+        
+        try {
+            FileReader fr = new FileReader(fileName); 
+            BufferedReader inputStream = new BufferedReader(fr);
+
+            String line = null;
+
+            while ((line=inputStream.readLine())!=null)
+            {
+                System.out.println(line);
+            }
+
+            inputStream.close();
+   
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("This user does not have any previous orders");
+        }
+        catch (IOException e) {
+            System.out.println("Error reading from file");
+        }
+    }
+    
 }
