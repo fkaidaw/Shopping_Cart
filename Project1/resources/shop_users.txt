@@ -1,6 +1,4 @@
-1 0
-3 0
-test 1
-4 0
-fahim 0
-l 0
+tet 3
+null 2
+test 0
+lucas 1
