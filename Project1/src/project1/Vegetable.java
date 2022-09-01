@@ -6,8 +6,9 @@ package project1;
 
 /**
  *
- * @author fahim
+ * @author lucasspain & Fahim
  */
+//Create vegetable objects 
 public class Vegetable extends Product
 {
        public Vegetable(String name, String manufacturer, double price)

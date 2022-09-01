@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fahim
+ * @author lucasspain & Fahim
  */
+//Creating meat objects 
 public class Meat extends Product
 {
     private double weight = 0.00;

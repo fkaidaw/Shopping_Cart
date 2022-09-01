@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 //ShopApp class, has the main method

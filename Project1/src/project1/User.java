@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 //class for user login in the shop app, users are stored in a hashmap that is read from a file
@@ -92,7 +92,6 @@ public class User {
         }
             
     }
-    // Talk to Lucas about removing the below code
     //method to write users in the hashmap to a text file
     public void writeUsers() {
         
@@ -106,7 +105,6 @@ public class User {
             Set eSet = users.entrySet();
             Iterator it = eSet.iterator();
             
-            
             while (it.hasNext())
             {
                 Map.Entry entry = (Map.Entry) it.next();
@@ -118,15 +116,12 @@ public class User {
                 pw.write("\n");
 
             }
-            
-            pw.close();
 
+            pw.close();
         }
         catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        
     }
 
-    
 }

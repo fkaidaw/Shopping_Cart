@@ -6,7 +6,7 @@ package project1;
 
 /**
  *
- * @author fahim
+ * @author lucasspain & Fahim
  */
 
 import java.io.*;
@@ -47,6 +47,22 @@ public class Receipt
 
     // print the list to text file 
     public void printToFile(Receipt receipt)
+    {
+	PrintWriter pw = null;
+	try
+	{
+            pw = new PrintWriter(new FileOutputStream("./resources/Receipt.txt"));
+            pw.println(receipt);
+            System.out.println("... written to out.txt.");
+            pw.close();
+	} 
+	catch(FileNotFoundException e)
+	{	
+            System.out.println(e.getMessage());
+	}
+    }
+      // print the list to text file 
+    public void printToFile(String receipt)
     {
 	PrintWriter pw = null;
 	try

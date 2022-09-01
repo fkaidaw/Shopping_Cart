@@ -6,7 +6,7 @@ package project1;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 //product is an abstract class - can be extended into different categories of products that will be listed on the store
@@ -96,7 +96,7 @@ public abstract class Product implements Comparable<Product>{
         
         return output;
     }
-    
+    //override for comparing products 
     @Override
     public int compareTo(Product p) {
         return this.getName().compareTo(p.getName());

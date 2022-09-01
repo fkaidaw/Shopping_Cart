@@ -6,7 +6,7 @@ package project1;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 import java.util.ArrayList;
@@ -68,11 +68,13 @@ public class Shop {
         
         int input = scan.nextInt();
         
-        switch (input) {
+        switch (input) 
+        {
             case 1:
                 printProducts(this.products);
                 break;
             case 2:
+                selectCategory();
                 break;
             case 3:
                 System.out.println("Search: ");
@@ -92,7 +94,6 @@ public class Shop {
                 System.out.println("Invalid input");
                 break;
         }
-        
     }
     
     //method to search for a product, returns an ArrayList of the products that were found
@@ -146,15 +147,24 @@ public class Shop {
     }
     
     //method to checkout
-    public void checkout() {
-        
-        System.out.println("\nthis is a test of the checkout method");
+    public void checkout() 
+    {
+       Receipt receipt = new Receipt();
+       
+       ArrayList<Product> cartProducts = cart.getInCart();
+       
+        for (int i = 0; i < cartProducts.size(); i++)
+        {
+            receipt.addProduct(cartProducts.get(i));
+        }
 
-        
+       System.out.println(cart);
+       receipt.printToFile(cart.toString());
     }
     
     //method to print products in an arraylist in pages of 5 items, sorted alphabetically
-    public void printProducts(ArrayList<Product> list) {
+    public void printProducts(ArrayList<Product> list) 
+    {
         
         Collections.sort(list);
         
@@ -313,6 +323,64 @@ public class Shop {
         
         this.printProducts(list);
         
+    }
+    
+    //Select category between meat, fruit or vegetable
+    public void selectCategory()
+    {
+        System.out.println("Categories");
+        System.out.println("1.Meat\n2.Fruit\n3.Vegetable\n4.Return to main menu\n5.Exit\n");
+        
+        int input = scan.nextInt();
+        
+        switch (input) 
+        {
+            case 1:
+                ArrayList<Product> meatList = new ArrayList<Product>(); 
+                for (int i = 0; i < this.products.size(); i++)
+                {
+                    Product product = this.products.get(i);
+                    if (product instanceof Meat)
+                    {
+                        meatList.add(product);
+                    }
+                }
+                printProducts(meatList);
+                break;
+            case 2:
+                ArrayList<Product> fruitList = new ArrayList<Product>(); 
+                for (int i = 0; i < this.products.size(); i++)
+                {
+                    Product product = this.products.get(i);
+                    if (product instanceof Fruit)
+                    {
+                        fruitList.add(product);
+                    }
+                }
+                printProducts(fruitList);
+                break;
+            case 3:
+                ArrayList<Product> vegetabableList = new ArrayList<Product>(); 
+                for (int i = 0; i < this.products.size(); i++)
+                {
+                    Product product = this.products.get(i);
+                    if (product instanceof Vegetable)
+                    {
+                        vegetabableList.add(product);
+                    }
+                }
+                printProducts(vegetabableList);
+                break;
+            case 4:
+                this.mainMenu();
+                break;
+            case 5:
+                this.exit();
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
     }
     
     //method to exit the program

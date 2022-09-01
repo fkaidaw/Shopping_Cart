@@ -1,4 +1,6 @@
-Receipt: 
-Product: Apple Manufacturer: Tesla Price: $4.99
-Product: Banana Manufacturer: Tesla Price: $2.99
+Cart contents:
+Product: Broccoli Manufacturer: Countdown Price: $2.49
+Product: Broccoli Manufacturer: Countdown Price: $2.49
 
+
+Total: $4.98
