@@ -1,5 +1,5 @@
 Cart contents:
-Product: Aubergine Manufacturer: Countdown Price: $6.99
+Product: Broccoli Manufacturer: Countdown Price: $2.49
 
 
-Total: $6.99
+Total: $2.49

@@ -312,6 +312,7 @@ public class Shop {
                 
                 input = scan.nextInt();
                 scan.nextLine();
+                
 
                 switch (input) {
                     case 1:
@@ -357,9 +358,13 @@ public class Shop {
                         
                         break;
                     case 5:
+                        cont = false;
+                        
                         viewCart();
                         break;
                     case 6:
+                        cont = false;
+                        
                         checkout();
                         break;
                     case 7:
