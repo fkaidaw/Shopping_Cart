@@ -15,7 +15,21 @@ import java.util.ArrayList;
 public class Cart {
     //instance variables
     private ArrayList<Product> inCart;
-    private int total;
+    private float total;
+
+    /**
+     * @return the total
+     */
+    public float getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(float total) {
+        this.total = total;
+    }
     
     //default constructor, creates an Arraylist of products and sets total price to 0
     public Cart() {
@@ -43,14 +57,14 @@ public class Cart {
         else {
 
             for (Product p : this.inCart) {
-                output += p.toString();
+                output += p.toString()+"\n";
 
-                this.total += p.getPrice();
+                this.setTotal((float) (this.getTotal() + p.getPrice()));
 
             }
         }
 
-        output += "\n\nTotal: $"+this.total;
+        output += "\n\nTotal: $"+this.getTotal();
         
         return output;
         
