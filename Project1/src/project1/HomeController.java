@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
  *
  * @author fahim
  */
-public class LoginController implements ActionListener
+public class HomeController implements ActionListener
 {
-    public LoginScreen view;
-    public LoginModel model;
+    public HomeScreen view;
+    public HomeModel model;
     
-    public LoginController(LoginScreen view , LoginModel model)
+    public HomeController(HomeScreen view , HomeModel model)
     {
         this.view = view;
         this.model = model;
@@ -29,19 +29,22 @@ public class LoginController implements ActionListener
         String command = e.getActionCommand();
         switch (command)
         {
-            case "Login":
-                String username = this.view.getUsernameField().getText();
-                String password = this.view.getPasswordField().getText();
-                this.model.checkName(username, password);
+            case "View all items":
+                this.model.viewAllItems();
+                break;
+            case "View Cart":
+                this.model.viewCart();
+                break;
+            case "Profile":
+                this.model.viewProfile();
                 break;
             case "Exit":
-                this.view.dispose();
-//                this.model.quitGame();
+                this.model.quitGame();
                 break;
             default:
                 break;
                 
         }
-    }
+    }  
 }
 

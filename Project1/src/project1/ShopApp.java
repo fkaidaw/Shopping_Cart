@@ -16,9 +16,12 @@ public class ShopApp {
 
     public static void main(String[] args) {
         
-        LoginView loginView = new LoginView();
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.setVisible(true);
         LoginModel loginModel = new LoginModel();
-        LoginController loginController = new LoginController(loginView, loginModel);
+        LoginController loginController = new LoginController(loginScreen, loginModel);
+        
+        
 
 //        ArrayList<Product> productList = new ArrayList<Product>();
 //

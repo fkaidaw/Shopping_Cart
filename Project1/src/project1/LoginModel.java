@@ -31,12 +31,15 @@ public class LoginModel extends Observable
         
         this.setChanged();
         this.notifyObservers(this.data);
+        
+        HomeScreen homeview = new HomeScreen();
+        homeview.setVisible(true);
+        HomeModel homemodel = new HomeModel();
+        HomeController homeController = new HomeController(homeview, homemodel);
     }
     
     public void quitGame()
     {
-        this.data.quitFlag = true;
-        this.setChanged();
-        this.notifyObservers(this.data);
+        System.exit(0);
     }
 }
