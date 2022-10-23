@@ -22,6 +22,7 @@ public class Purchase extends javax.swing.JFrame
     {
         initComponents();
         checkout();
+        userNameLabel.setText(Database.getDatabaseInstance().dbusername);
     }
     
     public void checkout() 
@@ -55,6 +56,8 @@ public class Purchase extends javax.swing.JFrame
         {
             listModel.addElement(productList.get(i));
         }
+        listModel.addElement("");
+        listModel.addElement("");
         listModel.addElement("");
         listModel.addElement("Total: " + Cart.getCartInstance().getTotal());
         itemList.setModel(listModel);
@@ -98,6 +101,7 @@ public class Purchase extends javax.swing.JFrame
             }
         });
 
+        userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userNameLabel.setText("User Information");
 
         itemList.setModel(new javax.swing.AbstractListModel<String>()

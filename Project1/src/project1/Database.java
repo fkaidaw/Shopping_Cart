@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,21 @@ public class Database
     
     String dbusername = "pdc";
     String dbpassword = "pdc";
+    
+    private static Database databaseInstance;
+    private Database()
+    { 
+      
+    }
+    
+    public static synchronized Database getDatabaseInstance()
+    {
+        if(databaseInstance == null)
+        {
+            databaseInstance = new  Database();
+        }
+        return databaseInstance;
+    }
     
     public void dbsetup()
     {

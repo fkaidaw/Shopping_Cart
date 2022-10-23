@@ -1,5 +1,8 @@
 package project1;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,6 +21,17 @@ public class Profile extends javax.swing.JFrame
     public Profile()
     {
         initComponents();
+        userLabel.setText(Database.getDatabaseInstance().dbusername);
+        
+        FileIO fileIO = new FileIO();
+        ArrayList<String> previousOrder = fileIO.userLastOrder(Database.getDatabaseInstance().dbusername);
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < previousOrder.size(); i++)
+        {
+            listModel.addElement(previousOrder.get(i));
+        }
+        itemList.setModel(listModel);
     }
 
     /**
@@ -33,9 +47,10 @@ public class Profile extends javax.swing.JFrame
         profile = new javax.swing.JPanel();
         mainmenuButton1 = new javax.swing.JButton();
         exitButton1 = new javax.swing.JButton();
-        allItemsLabel1 = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        itemList = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,39 +72,45 @@ public class Profile extends javax.swing.JFrame
             }
         });
 
-        allItemsLabel1.setText("User Information");
+        userLabel.setText("User Information");
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>()
+        itemList.setModel(new javax.swing.AbstractListModel<String>()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "No previous purchased items" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList3);
+        jScrollPane3.setViewportView(itemList);
+
+        jLabel1.setText("Previous Purchases");
 
         javax.swing.GroupLayout profileLayout = new javax.swing.GroupLayout(profile);
         profile.setLayout(profileLayout);
         profileLayout.setHorizontalGroup(
             profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userLabel)
+                .addGap(178, 178, 178))
             .addGroup(profileLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(mainmenuButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exitButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(allItemsLabel1)
-                .addGap(119, 119, 119))
+                .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         profileLayout.setVerticalGroup(
             profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(allItemsLabel1)
-                .addGap(45, 45, 45)
+                .addComponent(userLabel)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(profileLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
@@ -104,7 +125,7 @@ public class Profile extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+            .addGap(0, 466, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -132,7 +153,7 @@ public class Profile extends javax.swing.JFrame
 
     private void exitButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exitButton1ActionPerformed
     {//GEN-HEADEREND:event_exitButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_exitButton1ActionPerformed
 
     /**
@@ -181,11 +202,12 @@ public class Profile extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel allItemsLabel1;
     private javax.swing.JButton exitButton1;
-    private javax.swing.JList<String> jList3;
+    private javax.swing.JList<String> itemList;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton mainmenuButton1;
     private javax.swing.JPanel profile;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
 }

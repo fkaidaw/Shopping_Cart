@@ -1,5 +1,9 @@
-Cart contents:
-Product: Beef Mince Manufacturer:  Farmland Price: $7.99
+Chicken Breast Manufacturer: Tegels Price: $14.99
+Sirloin Steak Manufacturer: Harmony Taupo Price: $20.5
+Aubergine Manufacturer: Countdown Price: $6.99
+Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
+Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
+Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
 
 
-Total: $7.99
+Total: $81.45

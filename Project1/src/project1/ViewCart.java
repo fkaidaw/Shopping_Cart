@@ -94,7 +94,7 @@ public class ViewCart extends javax.swing.JFrame
 
         itemList.setModel(new javax.swing.AbstractListModel<String>()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "No added items" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -194,6 +194,21 @@ public class ViewCart extends javax.swing.JFrame
 
     private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_purchaseButtonActionPerformed
     {//GEN-HEADEREND:event_purchaseButtonActionPerformed
+
+        Receipt receipt = new Receipt();
+
+        ArrayList<Product> cartProducts = Cart.getCartInstance().getInCart();
+
+         for (int i = 0; i < cartProducts.size(); i++)
+         {
+             receipt.addProduct(cartProducts.get(i));
+         }
+
+        System.out.println(Cart.getCartInstance());
+        receipt.printToFile(Cart.getCartInstance().toString());
+
+        receipt.saveOrder(Database.getDatabaseInstance().dbusername, Cart.getCartInstance().toString());
+        
         new Purchase().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_purchaseButtonActionPerformed

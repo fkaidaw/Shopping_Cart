@@ -78,7 +78,7 @@ public class Cart {
     
     //prints out the contents of the cart ArrayList and the total price
     public String toString() {
-        String output = "Cart contents:\n";
+        String output = "";
         
         if (this.inCart.size() == 0) {
             output += "Cart is empty";

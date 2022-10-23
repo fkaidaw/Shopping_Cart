@@ -103,9 +103,9 @@ public class FileIO {
     }
     
     //method to get a users last order from a text file if it exists
-    public void userLastOrder(String username)
+    public ArrayList<String> userLastOrder(String username)
     {
-        
+        ArrayList<String> order = new ArrayList<String>();
         String fileName = "./resources/"+username+"_order.txt";
         
         try {
@@ -117,6 +117,7 @@ public class FileIO {
             while ((line=inputStream.readLine())!=null)
             {
                 System.out.println(line);
+                order.add(line);
             }
 
             inputStream.close();
@@ -128,6 +129,7 @@ public class FileIO {
         catch (IOException e) {
             System.out.println("Error reading from file");
         }
+        return order;
     }
     
         public ArrayList<String> readFile(String fileName)

@@ -20,7 +20,7 @@ public class LoginModel extends Observable
     
     public LoginModel()
     {
-        this.db = new Database();
+        this.db = Database.getDatabaseInstance();
         this.db.dbsetup();
     }
 
@@ -28,6 +28,8 @@ public class LoginModel extends Observable
     {
         this.username = username;
         this.data = this.db.checkName(username, password);
+        this.db.dbusername = username;
+        this.db.dbpassword = password;
         
         this.setChanged();
         this.notifyObservers(this.data);

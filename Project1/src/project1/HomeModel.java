@@ -17,7 +17,7 @@ public class HomeModel extends Observable
     
     public HomeModel()
     {
-        this.db = new Database();
+        this.db = Database.getDatabaseInstance();
         this.db.dbsetup();
     }
     
