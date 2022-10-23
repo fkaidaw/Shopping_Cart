@@ -58,8 +58,7 @@ public class Shop {
     public Shop() {
         this.products = new ArrayList();
         this.cart = new Cart();
-        
-        this.user = new User();
+       
     }
     
     //method to start the online shop menu

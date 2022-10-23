@@ -92,7 +92,7 @@ public abstract class Product implements Comparable<Product>{
             
     //toString method, prints out name, manufacturer, and price
     public String toString() {
-        String output = "Product: " + this.name + " Manufacturer: "+this.manufacturer + " Price: $"+this.price;
+        String output = this.name + " Manufacturer: "+this.manufacturer + " Price: $"+this.price;
         
         return output;
     }

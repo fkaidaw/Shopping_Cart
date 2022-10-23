@@ -1,5 +1,8 @@
 package project1;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,6 +21,27 @@ public class ViewAllItems extends javax.swing.JFrame
     public ViewAllItems()
     {
         initComponents();
+        
+        ArrayList<Product> productList = new ArrayList<Product>();
+        
+        MeatReader meatReader = new MeatReader();
+        ArrayList<Product> meatList = meatReader.getMeats();
+        productList.addAll(meatList);
+
+        FruitReader fruitReader = new FruitReader();
+        ArrayList<Product> fruitList = fruitReader.getFruit();
+        productList.addAll(fruitList);
+
+        VegetableReader vegetableReader = new VegetableReader();
+        ArrayList<Product> vegetableList = vegetableReader.getVegetable();
+        productList.addAll(vegetableList);
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < productList.size(); i++)
+        {
+            listModel.addElement(productList.get(i));
+        }
+        itemList.setModel(listModel);
     }
 
     /**
@@ -35,8 +59,6 @@ public class ViewAllItems extends javax.swing.JFrame
         checkoutButton = new javax.swing.JButton();
         mainmenuButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        previousButton = new javax.swing.JButton();
-        nextButton = new javax.swing.JButton();
         meatButton = new javax.swing.JButton();
         vegetableButton = new javax.swing.JButton();
         fruitButton = new javax.swing.JButton();
@@ -44,7 +66,9 @@ public class ViewAllItems extends javax.swing.JFrame
         addToCartButton = new javax.swing.JButton();
         allItemsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        itemList = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        allItems = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,15 +101,32 @@ public class ViewAllItems extends javax.swing.JFrame
             }
         });
 
-        previousButton.setText("Previous");
-
-        nextButton.setText("Next");
-
         meatButton.setText("Meat");
+        meatButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                meatButtonActionPerformed(evt);
+            }
+        });
 
         vegetableButton.setText("Vegetable");
+        vegetableButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                vegetableButtonActionPerformed(evt);
+            }
+        });
 
         fruitButton.setText("Fruit");
+        fruitButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                fruitButtonActionPerformed(evt);
+            }
+        });
 
         searchButton.setText("Search");
 
@@ -100,13 +141,24 @@ public class ViewAllItems extends javax.swing.JFrame
 
         allItemsLabel.setText("All Items");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>()
+        itemList.setModel(new javax.swing.AbstractListModel<String>()
         {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(itemList);
+
+        jLabel1.setText("Categories");
+
+        allItems.setText("All Items");
+        allItems.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                allItemsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout viewAllItemsLayout = new javax.swing.GroupLayout(viewAllItems);
         viewAllItems.setLayout(viewAllItemsLayout);
@@ -114,56 +166,50 @@ public class ViewAllItems extends javax.swing.JFrame
             viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllItemsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(allItemsLabel)
-                .addGap(189, 189, 189))
-            .addGroup(viewAllItemsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainmenuButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewCartButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(checkoutButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exitButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllItemsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addToCartButton)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllItemsLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(viewAllItemsLayout.createSequentialGroup()
-                                .addComponent(meatButton, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vegetableButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(fruitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(75, 75, 75))))
-            .addGroup(viewAllItemsLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(previousButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
-        );
-        viewAllItemsLayout.setVerticalGroup(
-            viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(allItemsLabel))
+                .addGap(179, 179, 179))
             .addGroup(viewAllItemsLayout.createSequentialGroup()
                 .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewAllItemsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(allItemsLabel)
-                        .addGap(9, 9, 9)
-                        .addComponent(nextButton))
+                        .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mainmenuButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(viewCartButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(checkoutButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(exitButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewAllItemsLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                                .addComponent(addToCartButton))))
                     .addGroup(viewAllItemsLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(previousButton)
-                        .addGap(18, 18, 18)
-                        .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(meatButton)
-                            .addComponent(vegetableButton)
-                            .addComponent(fruitButton))))
+                        .addGap(83, 83, 83)
+                        .addComponent(allItems)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(meatButton, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vegetableButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fruitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27))
+        );
+        viewAllItemsLayout.setVerticalGroup(
+            viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewAllItemsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(allItemsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(meatButton)
+                    .addComponent(vegetableButton)
+                    .addComponent(fruitButton)
+                    .addComponent(allItems))
                 .addGroup(viewAllItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewAllItemsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -192,21 +238,17 @@ public class ViewAllItems extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(viewAllItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 29, Short.MAX_VALUE)
+                .addComponent(viewAllItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(viewAllItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(viewAllItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,13 +267,79 @@ public class ViewAllItems extends javax.swing.JFrame
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exitButtonActionPerformed
     {//GEN-HEADEREND:event_exitButtonActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void addToCartButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addToCartButtonActionPerformed
     {//GEN-HEADEREND:event_addToCartButtonActionPerformed
 
     }//GEN-LAST:event_addToCartButtonActionPerformed
+
+    private void meatButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_meatButtonActionPerformed
+    {//GEN-HEADEREND:event_meatButtonActionPerformed
+        itemList.removeAll();
+        MeatReader meatReader = new MeatReader();
+        ArrayList<Product> meatList = meatReader.getMeats();
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < meatList.size(); i++)
+        {
+            listModel.addElement(meatList.get(i));
+        }
+        itemList.setModel(listModel);
+    }//GEN-LAST:event_meatButtonActionPerformed
+
+    private void allItemsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_allItemsActionPerformed
+    {//GEN-HEADEREND:event_allItemsActionPerformed
+        itemList.removeAll();
+        ArrayList<Product> productList = new ArrayList<Product>();
+        MeatReader meatReader = new MeatReader();
+        ArrayList<Product> meatList = meatReader.getMeats();
+        productList.addAll(meatList);
+
+        FruitReader fruitReader = new FruitReader();
+        ArrayList<Product> fruitList = fruitReader.getFruit();
+        productList.addAll(fruitList);
+
+        VegetableReader vegetableReader = new VegetableReader();
+        ArrayList<Product> vegetableList = vegetableReader.getVegetable();
+        productList.addAll(vegetableList);
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < productList.size(); i++)
+        {
+            listModel.addElement(productList.get(i));
+        }
+        itemList.setModel(listModel);
+    }//GEN-LAST:event_allItemsActionPerformed
+
+    private void vegetableButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_vegetableButtonActionPerformed
+    {//GEN-HEADEREND:event_vegetableButtonActionPerformed
+        itemList.removeAll();
+
+        VegetableReader vegetableReader = new VegetableReader();
+        ArrayList<Product> vegetableList = vegetableReader.getVegetable();
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < vegetableList.size(); i++)
+        {
+            listModel.addElement(vegetableList.get(i));
+        }
+        itemList.setModel(listModel);
+    }//GEN-LAST:event_vegetableButtonActionPerformed
+
+    private void fruitButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fruitButtonActionPerformed
+    {//GEN-HEADEREND:event_fruitButtonActionPerformed
+        FruitReader fruitReader = new FruitReader();
+        ArrayList<Product> fruitList = fruitReader.getFruit();
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < fruitList.size(); i++)
+        {
+            listModel.addElement(fruitList.get(i));
+        }
+        itemList.setModel(listModel);
+    }//GEN-LAST:event_fruitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,16 +388,16 @@ public class ViewAllItems extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addToCartButton;
+    private javax.swing.JButton allItems;
     private javax.swing.JLabel allItemsLabel;
     private javax.swing.JButton checkoutButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JButton fruitButton;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> itemList;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton mainmenuButton;
     private javax.swing.JButton meatButton;
-    private javax.swing.JButton nextButton;
-    private javax.swing.JButton previousButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton vegetableButton;
     private javax.swing.JPanel viewAllItems;
