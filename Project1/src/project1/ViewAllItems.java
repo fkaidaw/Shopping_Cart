@@ -301,7 +301,7 @@ public class ViewAllItems extends javax.swing.JFrame
     {//GEN-HEADEREND:event_addToCartButtonActionPerformed
         int index = itemList.getSelectedIndex();
         Product selectedProduct = displayList.get(index);
-        System.out.println(selectedProduct);
+        Cart.getCartInstance().add(selectedProduct);
     }//GEN-LAST:event_addToCartButtonActionPerformed
 
     private void meatButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_meatButtonActionPerformed

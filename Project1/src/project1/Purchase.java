@@ -1,5 +1,8 @@
 package project1;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,15 +12,52 @@ package project1;
  *
  * @author fahim
  */
-public class Checkout extends javax.swing.JFrame
+public class Purchase extends javax.swing.JFrame
 {
 
     /**
      * Creates new form Profile
      */
-    public Checkout()
+    public Purchase()
     {
         initComponents();
+        checkout();
+    }
+    
+    public void checkout() 
+    {
+        if (Cart.getCartInstance().getInCart().size() > 0)
+        {
+            Receipt receipt = new Receipt();
+
+            ArrayList<Product> cartProducts = Cart.getCartInstance().getInCart();
+
+             for (int i = 0; i < cartProducts.size(); i++)
+             {
+                 receipt.addProduct(cartProducts.get(i));
+             }
+
+            System.out.println(Cart.getCartInstance());
+            receipt.printToFile(Cart.getCartInstance().toString());
+
+            receipt.saveOrder("TEST", Cart.getCartInstance().toString());
+
+        }
+        else
+        {
+            System.out.println("Cart is empty. Returning to menu");
+        }
+        
+        ArrayList<Product> productList = Cart.getCartInstance().getInCart();
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < productList.size(); i++)
+        {
+            listModel.addElement(productList.get(i));
+        }
+        listModel.addElement("");
+        listModel.addElement("Total: " + Cart.getCartInstance().getTotal());
+        itemList.setModel(listModel);
     }
 
     /**
@@ -30,12 +70,12 @@ public class Checkout extends javax.swing.JFrame
     private void initComponents()
     {
 
-        Checkout = new javax.swing.JPanel();
+        Purchase = new javax.swing.JPanel();
         mainmenuButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         userNameLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        itemList = new javax.swing.JList<>();
         receipt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,77 +100,77 @@ public class Checkout extends javax.swing.JFrame
 
         userNameLabel.setText("User Information");
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>()
+        itemList.setModel(new javax.swing.AbstractListModel<String>()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Your cart is empty!!" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList3);
+        jScrollPane3.setViewportView(itemList);
 
         receipt.setText("Receipt");
 
-        javax.swing.GroupLayout CheckoutLayout = new javax.swing.GroupLayout(Checkout);
-        Checkout.setLayout(CheckoutLayout);
-        CheckoutLayout.setHorizontalGroup(
-            CheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CheckoutLayout.createSequentialGroup()
+        javax.swing.GroupLayout PurchaseLayout = new javax.swing.GroupLayout(Purchase);
+        Purchase.setLayout(PurchaseLayout);
+        PurchaseLayout.setHorizontalGroup(
+            PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PurchaseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(CheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CheckoutLayout.createSequentialGroup()
-                        .addGroup(CheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PurchaseLayout.createSequentialGroup()
+                        .addGroup(PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(mainmenuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CheckoutLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(39, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PurchaseLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(CheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CheckoutLayout.createSequentialGroup()
-                                .addComponent(userNameLabel)
-                                .addGap(119, 119, 119))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CheckoutLayout.createSequentialGroup()
+                        .addGroup(PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PurchaseLayout.createSequentialGroup()
                                 .addComponent(receipt)
-                                .addGap(138, 138, 138))))))
+                                .addGap(213, 213, 213))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PurchaseLayout.createSequentialGroup()
+                                .addComponent(userNameLabel)
+                                .addGap(185, 185, 185))))))
         );
-        CheckoutLayout.setVerticalGroup(
-            CheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CheckoutLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+        PurchaseLayout.setVerticalGroup(
+            PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PurchaseLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
                 .addComponent(userNameLabel)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(receipt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CheckoutLayout.createSequentialGroup()
+                .addGroup(PurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PurchaseLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(mainmenuButton)
                         .addGap(18, 18, 18)
                         .addComponent(exitButton))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+            .addGap(0, 489, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Purchase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 9, Short.MAX_VALUE)
+                    .addComponent(Purchase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 10, Short.MAX_VALUE)))
         );
 
         pack();
@@ -169,17 +209,19 @@ public class Checkout extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(Checkout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(Checkout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(Checkout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(Checkout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -188,15 +230,15 @@ public class Checkout extends javax.swing.JFrame
         {
             public void run()
             {
-                new Checkout().setVisible(true);
+                new Purchase().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Checkout;
+    private javax.swing.JPanel Purchase;
     private javax.swing.JButton exitButton;
-    private javax.swing.JList<String> jList3;
+    private javax.swing.JList<String> itemList;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton mainmenuButton;
     private javax.swing.JLabel receipt;

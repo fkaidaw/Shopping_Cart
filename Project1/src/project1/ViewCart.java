@@ -1,5 +1,9 @@
 package project1;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,8 +22,17 @@ public class ViewCart extends javax.swing.JFrame
     public ViewCart()
     {
         initComponents();
+        ArrayList<Product> productList = Cart.getCartInstance().getInCart();
+        
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < productList.size(); i++)
+        {
+            listModel.addElement(productList.get(i));
+        }
+        itemList.setModel(listModel);
     }
 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +47,7 @@ public class ViewCart extends javax.swing.JFrame
         mainmenuButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
-        checkoutButton = new javax.swing.JButton();
+        purchaseButton = new javax.swing.JButton();
         shoppingCartLabel = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
         itemList = new javax.swing.JList<>();
@@ -68,12 +81,12 @@ public class ViewCart extends javax.swing.JFrame
             }
         });
 
-        checkoutButton.setText("Add to cart");
-        checkoutButton.addActionListener(new java.awt.event.ActionListener()
+        purchaseButton.setText("Purchase");
+        purchaseButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                checkoutButtonActionPerformed(evt);
+                purchaseButtonActionPerformed(evt);
             }
         });
 
@@ -91,59 +104,64 @@ public class ViewCart extends javax.swing.JFrame
         viewCart.setLayout(viewCartLayout);
         viewCartLayout.setHorizontalGroup(
             viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewCartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mainmenuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewCartLayout.createSequentialGroup()
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(42, Short.MAX_VALUE))
+                    .addGroup(viewCartLayout.createSequentialGroup()
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(purchaseButton)
+                        .addGap(25, 25, 25))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewCartLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(shoppingCartLabel)
-                .addGap(172, 172, 172))
-            .addGroup(viewCartLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(checkoutButton)
-                    .addGroup(viewCartLayout.createSequentialGroup()
-                        .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mainmenuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(190, 190, 190))
         );
         viewCartLayout.setVerticalGroup(
             viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewCartLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(shoppingCartLabel)
                 .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewCartLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                        .addGap(94, 94, 94)
                         .addComponent(mainmenuButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(exitButton))
                     .addGroup(viewCartLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(shoppingCartLabel)
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkoutButton)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewCartLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeButton))
+                    .addGroup(viewCartLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(purchaseButton)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 8, Short.MAX_VALUE)
                     .addComponent(viewCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 8, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGap(0, 291, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -167,13 +185,18 @@ public class ViewCart extends javax.swing.JFrame
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_removeButtonActionPerformed
     {//GEN-HEADEREND:event_removeButtonActionPerformed
-        // TODO add your handling code here:
+        int selectedItem = itemList.getSelectedIndex();
+        DefaultListModel listModel = (DefaultListModel) itemList.getModel();
+        listModel.remove(selectedItem);
+        
+        Cart.getCartInstance().remove(selectedItem);
     }//GEN-LAST:event_removeButtonActionPerformed
 
-    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkoutButtonActionPerformed
-    {//GEN-HEADEREND:event_checkoutButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkoutButtonActionPerformed
+    private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_purchaseButtonActionPerformed
+    {//GEN-HEADEREND:event_purchaseButtonActionPerformed
+        new Purchase().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_purchaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,11 +244,11 @@ public class ViewCart extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton checkoutButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JList<String> itemList;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JButton mainmenuButton;
+    private javax.swing.JButton purchaseButton;
     private javax.swing.JButton removeButton;
     private javax.swing.JLabel shoppingCartLabel;
     private javax.swing.JPanel viewCart;

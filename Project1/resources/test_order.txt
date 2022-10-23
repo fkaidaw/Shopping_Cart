@@ -1,5 +1,7 @@
 Cart contents:
-Product: Broccoli Manufacturer: Countdown Price: $2.49
+Chicken Breast Manufacturer: Tegels Price: $14.99
+Beef Mince Manufacturer:  Farmland Price: $7.99
+Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
 
 
-Total: $2.49
+Total: $35.97

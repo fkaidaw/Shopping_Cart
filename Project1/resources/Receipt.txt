@@ -1,5 +1,7 @@
 Cart contents:
-Product: Beef Mince Manufacturer:  Farmland Price: $7.99
+Chicken Breast Manufacturer: Tegels Price: $14.99
+Beef Mince Manufacturer:  Farmland Price: $7.99
+Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
 
 
-Total: $7.99
+Total: $35.97

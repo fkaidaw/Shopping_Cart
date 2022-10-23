@@ -9,10 +9,30 @@ package project1;
  * @author lucasspain & Fahim
  */
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 //class for the shopping cart - used to keep track of the products the user will buy
 public class Cart {
+    
+    private static Cart cartInstance;
+    private Cart()
+    { 
+        this.inCart = new ArrayList();
+        this.total = 0;
+    }
+    
+    public static synchronized Cart getCartInstance()
+    {
+        if(cartInstance == null)
+        {
+            cartInstance = new  Cart();
+        }
+        return cartInstance;
+    }
+    
     //instance variables
     private ArrayList<Product> inCart;
     private float total;
@@ -21,6 +41,10 @@ public class Cart {
      * @return the total
      */
     public float getTotal() {
+        total = 0.0f;
+        for (Product p : this.inCart) {
+            this.setTotal((float) (total + p.getPrice()));
+        }
         return total;
     }
 
@@ -29,12 +53,6 @@ public class Cart {
      */
     public void setTotal(float total) {
         this.total = total;
-    }
-    
-    //default constructor, creates an Arraylist of products and sets total price to 0
-    public Cart() {
-        this.inCart = new ArrayList();
-        this.total = 0;
     }
     
     //method to add a product to the cart
@@ -51,6 +69,11 @@ public class Cart {
     //method to remove a product from the cart
     public void remove(Product p) {
         this.inCart.remove(p);
+    }
+    
+    
+    public void remove(int index) {
+        this.inCart.remove(index);
     }
     
     //prints out the contents of the cart ArrayList and the total price

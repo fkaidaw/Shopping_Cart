@@ -57,7 +57,7 @@ public class Shop {
     //default constructor for a shop - creates an ArrayList of products and a Cart object
     public Shop() {
         this.products = new ArrayList();
-        this.cart = new Cart();
+        //this.cart = new Cart();
        
     }
     
