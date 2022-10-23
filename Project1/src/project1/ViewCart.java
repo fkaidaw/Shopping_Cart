@@ -31,121 +31,103 @@ public class ViewCart extends javax.swing.JFrame
     {
 
         viewCart = new javax.swing.JPanel();
-        mainmenuButton2 = new javax.swing.JButton();
-        exitButton2 = new javax.swing.JButton();
-        previousButton2 = new javax.swing.JButton();
-        nextButton2 = new javax.swing.JButton();
-        searchButton2 = new javax.swing.JButton();
-        addToCartButton2 = new javax.swing.JButton();
-        allItemsLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        mainmenuButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
+        checkoutButton = new javax.swing.JButton();
+        shoppingCartLabel = new javax.swing.JLabel();
+        jScrollPane = new javax.swing.JScrollPane();
+        itemList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        mainmenuButton2.setText("Main menu");
-        mainmenuButton2.addActionListener(new java.awt.event.ActionListener()
+        mainmenuButton.setText("Main menu");
+        mainmenuButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mainmenuButton2ActionPerformed(evt);
+                mainmenuButtonActionPerformed(evt);
             }
         });
 
-        exitButton2.setText("Exit");
-        exitButton2.addActionListener(new java.awt.event.ActionListener()
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                exitButton2ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
-        previousButton2.setText("Previous");
-
-        nextButton2.setText("Next");
-
-        searchButton2.setText("Remove");
-        searchButton2.addActionListener(new java.awt.event.ActionListener()
+        removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                searchButton2ActionPerformed(evt);
+                removeButtonActionPerformed(evt);
             }
         });
 
-        addToCartButton2.setText("Add to cart");
-        addToCartButton2.addActionListener(new java.awt.event.ActionListener()
+        checkoutButton.setText("Add to cart");
+        checkoutButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                addToCartButton2ActionPerformed(evt);
+                checkoutButtonActionPerformed(evt);
             }
         });
 
-        allItemsLabel2.setText("Shopping Cart");
+        shoppingCartLabel.setText("Shopping Cart");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>()
+        itemList.setModel(new javax.swing.AbstractListModel<String>()
         {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane.setViewportView(itemList);
 
         javax.swing.GroupLayout viewCartLayout = new javax.swing.GroupLayout(viewCart);
         viewCart.setLayout(viewCartLayout);
         viewCartLayout.setHorizontalGroup(
             viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewCartLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewCartLayout.createSequentialGroup()
-                        .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mainmenuButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(exitButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(viewCartLayout.createSequentialGroup()
-                                    .addComponent(previousButton2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nextButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(searchButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(77, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewCartLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addToCartButton2)
-                        .addGap(33, 33, 33))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewCartLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(allItemsLabel2)
+                .addComponent(shoppingCartLabel)
                 .addGap(172, 172, 172))
+            .addGroup(viewCartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(checkoutButton)
+                    .addGroup(viewCartLayout.createSequentialGroup()
+                        .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(mainmenuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         viewCartLayout.setVerticalGroup(
             viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewCartLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(allItemsLabel2)
-                .addGap(46, 46, 46)
-                .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nextButton2)
-                    .addComponent(previousButton2))
-                .addGap(18, 18, 18)
+                .addComponent(shoppingCartLabel)
                 .addGroup(viewCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewCartLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(mainmenuButton2)
+                        .addGap(72, 72, 72)
+                        .addComponent(mainmenuButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exitButton2))
+                        .addComponent(exitButton))
                     .addGroup(viewCartLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(searchButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(addToCartButton2)
-                .addGap(17, 17, 17))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(removeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkoutButton)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -172,25 +154,26 @@ public class ViewCart extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mainmenuButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mainmenuButton2ActionPerformed
-    {//GEN-HEADEREND:event_mainmenuButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mainmenuButton2ActionPerformed
+    private void mainmenuButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mainmenuButtonActionPerformed
+    {//GEN-HEADEREND:event_mainmenuButtonActionPerformed
+        new HomeScreen().setVisible(true);       
+        this.dispose();
+    }//GEN-LAST:event_mainmenuButtonActionPerformed
 
-    private void exitButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exitButton2ActionPerformed
-    {//GEN-HEADEREND:event_exitButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exitButton2ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exitButtonActionPerformed
+    {//GEN-HEADEREND:event_exitButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void searchButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchButton2ActionPerformed
-    {//GEN-HEADEREND:event_searchButton2ActionPerformed
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_removeButtonActionPerformed
+    {//GEN-HEADEREND:event_removeButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchButton2ActionPerformed
+    }//GEN-LAST:event_removeButtonActionPerformed
 
-    private void addToCartButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addToCartButton2ActionPerformed
-    {//GEN-HEADEREND:event_addToCartButton2ActionPerformed
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkoutButtonActionPerformed
+    {//GEN-HEADEREND:event_checkoutButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addToCartButton2ActionPerformed
+    }//GEN-LAST:event_checkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,15 +221,13 @@ public class ViewCart extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addToCartButton2;
-    private javax.swing.JLabel allItemsLabel2;
-    private javax.swing.JButton exitButton2;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton mainmenuButton2;
-    private javax.swing.JButton nextButton2;
-    private javax.swing.JButton previousButton2;
-    private javax.swing.JButton searchButton2;
+    private javax.swing.JButton checkoutButton;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JList<String> itemList;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton mainmenuButton;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JLabel shoppingCartLabel;
     private javax.swing.JPanel viewCart;
     // End of variables declaration//GEN-END:variables
 }

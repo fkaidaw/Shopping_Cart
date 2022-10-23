@@ -33,8 +33,6 @@ public class Profile extends javax.swing.JFrame
         profile = new javax.swing.JPanel();
         mainmenuButton1 = new javax.swing.JButton();
         exitButton1 = new javax.swing.JButton();
-        previousButton1 = new javax.swing.JButton();
-        nextButton1 = new javax.swing.JButton();
         allItemsLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
@@ -59,10 +57,6 @@ public class Profile extends javax.swing.JFrame
             }
         });
 
-        previousButton1.setText("Previous");
-
-        nextButton1.setText("Next");
-
         allItemsLabel1.setText("User Information");
 
         jList3.setModel(new javax.swing.AbstractListModel<String>()
@@ -77,10 +71,6 @@ public class Profile extends javax.swing.JFrame
         profile.setLayout(profileLayout);
         profileLayout.setHorizontalGroup(
             profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(allItemsLabel1)
-                .addGap(177, 177, 177))
             .addGroup(profileLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -88,33 +78,26 @@ public class Profile extends javax.swing.JFrame
                     .addComponent(exitButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
-            .addGroup(profileLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(previousButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nextButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(allItemsLabel1)
+                .addGap(119, 119, 119))
         );
         profileLayout.setVerticalGroup(
             profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(allItemsLabel1)
-                .addGap(46, 46, 46)
-                .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(previousButton1)
-                    .addComponent(nextButton1))
+                .addGap(45, 45, 45)
                 .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(profileLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(52, 52, 52)
                         .addComponent(mainmenuButton1)
                         .addGap(18, 18, 18)
                         .addComponent(exitButton1))
-                    .addGroup(profileLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,7 +126,8 @@ public class Profile extends javax.swing.JFrame
 
     private void mainmenuButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mainmenuButton1ActionPerformed
     {//GEN-HEADEREND:event_mainmenuButton1ActionPerformed
-        // TODO add your handling code here:
+        new HomeScreen().setVisible(true);       
+        this.dispose();
     }//GEN-LAST:event_mainmenuButton1ActionPerformed
 
     private void exitButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exitButton1ActionPerformed
@@ -202,8 +186,6 @@ public class Profile extends javax.swing.JFrame
     private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton mainmenuButton1;
-    private javax.swing.JButton nextButton1;
-    private javax.swing.JButton previousButton1;
     private javax.swing.JPanel profile;
     // End of variables declaration//GEN-END:variables
 }
