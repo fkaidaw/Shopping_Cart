@@ -11,7 +11,7 @@ package project1;
 //Create vegetable objects 
 public class Vegetable extends Product
 {
-       public Vegetable(String name, String manufacturer, double price)
+    public Vegetable(String name, String manufacturer, double price)
     {
         this.setName(name);
         this.setManufacturer(manufacturer);

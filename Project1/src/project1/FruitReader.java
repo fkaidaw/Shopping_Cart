@@ -17,12 +17,15 @@ import java.util.ArrayList;
 // file reader for fruit 
 public class FruitReader
 {
-    //gets fruit from the fruit file
-     public ArrayList<Product> getFruit()
+    public FruitReader(){
+        insertFruit();
+    }
+    
+    //gets vegetables from vegetable file and puts into database
+     public void insertFruit()
     {
-        ArrayList<Product> fruitList = new ArrayList<Product>();
-        
         String fileName = "./resources/Fruit.txt";
+        
         FileIO fileIO = new FileIO();
         ArrayList<String> fileLines = fileIO.readFile(fileName);
         
@@ -33,9 +36,15 @@ public class FruitReader
             String manufacturer = values[1];
             double price = Double.parseDouble(values[2]);
 
-            Fruit fruit = new Fruit(name, manufacturer, price);
-            fruitList.add(fruit);
+            Reader.insertData(name, manufacturer, "Fruit", price);
         }
+    }
+     
+    //gets vegetable from vegetable file
+     public ArrayList<Product> getFruit()
+    {
+        ArrayList<Product> fruitList = Reader.getCategory("Fruit");
         return fruitList;
     }
+     
 }

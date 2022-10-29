@@ -17,26 +17,34 @@ import java.util.ArrayList;
 // file reader for meat 
 public class MeatReader
 {
-    //gets meat from meat file 
-     public ArrayList<Product> getMeats()
+    public MeatReader(){
+        insertMeat();
+    }
+    
+    //gets vegetables from vegetable file and puts into database
+     public void insertMeat()
     {
-        ArrayList<Product> meatList = new ArrayList<Product>();
-        
         String fileName = "./resources/Meat.txt";
+        
         FileIO fileIO = new FileIO();
         ArrayList<String> fileLines = fileIO.readFile(fileName);
-
+        
         for (int i = 0; i < fileLines.size(); i++)
         {
-            String[] values = fileLines.get(i).split(",", 4);
+            String[] values = fileLines.get(i).split(",", 3);
             String name = values[0];
             String manufacturer = values[1];
             double price = Double.parseDouble(values[2]);
-            int weight = Integer.parseInt(values[3]);
 
-            Meat meat = new Meat(name, manufacturer, price, weight);
-            meatList.add(meat);
+            Reader.insertData(name, manufacturer, "Meat", price);
         }
+    }
+     
+    //gets meat from product database
+     public ArrayList<Product> getMeats()
+    {
+        ArrayList<Product> meatList = Reader.getCategory("Meat");
         return meatList;
     }
+     
 }

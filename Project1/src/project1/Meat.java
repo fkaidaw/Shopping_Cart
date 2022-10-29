@@ -20,21 +20,10 @@ public class Meat extends Product
 {
     private double weight = 0.00;
     
-    public Meat(String name, String manufacturer, double price, double weight)
+    public Meat(String name, String manufacturer, double price)
     {
         this.setName(name);
         this.setManufacturer(manufacturer);
         this.setPrice(price);
-        this.weight = weight;
-    }
-
-    public double getWeight()
-    {
-        return weight;
-    }
-
-    public void setWeight(double weight)
-    {
-        this.weight = weight;
     }
 }

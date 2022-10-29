@@ -21,7 +21,6 @@ public class LoginModel extends Observable
     public LoginModel()
     {
         this.db = Database.getDatabaseInstance();
-        this.db.dbsetup();
     }
 
     public void checkName(String username, String password)

@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ShopApp {
 
     public static void main(String[] args) {
-        
+
         ArrayList<Product> productList = new ArrayList<Product>();
 
         MeatReader meatReader = new MeatReader();

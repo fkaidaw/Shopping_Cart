@@ -1,9 +1,4 @@
-Chicken Breast Manufacturer: Tegels Price: $14.99
-Sirloin Steak Manufacturer: Harmony Taupo Price: $20.5
-Aubergine Manufacturer: Countdown Price: $6.99
-Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
-Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
 Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
 
 
-Total: $81.45
+Total: $12.99

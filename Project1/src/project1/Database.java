@@ -27,7 +27,7 @@ public class Database
     String dbpassword = "pdc";
     
     private static Database databaseInstance;
-    private Database()
+    public Database()
     { 
       
     }
@@ -45,13 +45,20 @@ public class Database
     {
         try
         {
-            conn = DriverManager.getConnection("jdbc:derby:ShoppingListTestDB;create=true", "pdc", "pdc");
+            conn = DriverManager.getConnection("jdbc:derby:ShoppingListTestDB;create=true", "pdc", "pdc");  
             Statement statement = conn.createStatement();
             String tableName = "UserInfo";
 
             if (!checkTableExisting(tableName)) 
             {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (userid VARCHAR(12), password VARCHAR(12), score INT)");
+                statement.executeUpdate("CREATE TABLE " + tableName + " (userid INT, username VARCHAR(12), password VARCHAR(12))");
+            }
+            
+            tableName = "Products";
+
+            if (!checkTableExisting(tableName)) 
+            {
+                statement.executeUpdate("CREATE TABLE " + tableName + " (itemid INT, name VARCHAR(50), manufacturer VARCHAR(50), category VARCHAR(50), price FLOAT)");
             }
             statement.close();
         }
@@ -68,16 +75,16 @@ public class Database
         Data data = new Data();
         try
         {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo "
-                    + "WHERE userid = '" + username + "'");
+            Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = statement.executeQuery("SELECT userid, password FROM UserInfo "
+                    + "WHERE username = '" + username + "'");
             if (rs.next())
             {
                 String pass = rs.getString("password");
-                System.out.println("***" + pass);
+                System.out.println(username + "***");
                 System.out.println("found user");
 
-                if (password.compareTo(pass) == 0) 
+                if (password.equals(pass)) 
                 {
                    data.loginFlag = true;
                 }
@@ -88,9 +95,23 @@ public class Database
             }
             else
             {
+                int currID = 0;
+                rs = statement.executeQuery("SELECT * FROM UserInfo");
+                
+                rs.beforeFirst();
+                if (rs.next())
+                {
+                    rs.last();
+                    
+                    currID = rs.getInt("userid") + 1; 
+                    
+                }
+                
+                rs.beforeFirst();
+                
                 System.out.println("no such user");
                 statement.executeUpdate("INSERT INTO UserInfo "
-                        + "VALUES('" + username + "','" + password + "', 0)");
+                        + "VALUES(" + currID + ", '" + username + "','" + password + "')");
                 data.loginFlag = true;
             }
         }
@@ -101,12 +122,11 @@ public class Database
         return data;
     }
 
-    private boolean checkTableExisting(String newTableName)
+    public boolean checkTableExisting(String newTableName)
     {
         boolean flag = false;
         try
         {
-            System.out.println("check existing tables... ");
             String[] types = {"TABLE"};
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);
@@ -116,7 +136,6 @@ public class Database
                 String tableName = rsDBMeta.getString("TABLE_NAME");
                 if (tableName.compareToIgnoreCase(newTableName) == 0) 
                 {
-                     System.out.println(tableName + " is there");
                      flag = true;
                 }
             }
@@ -127,21 +146,101 @@ public class Database
         }
         catch (SQLException ex)
         {
-
+            System.out.println("SQLException: "+ex);
         }
         return flag;
     }
-    public void quitGame(int score, String username)
+    
+    //insert products into the product table
+    public void insertProduct(String name, String manufacturer, String category, double price)
     {
-        Statement statement;
-        try
+        dbsetup();
+        
+        int currID = 0;
+        boolean exists = false;
+        
+        try {
+        
+            ResultSet rs = null;
+            
+             if (conn == null)
+             {
+                conn = DriverManager.getConnection("jdbc:derby:ShoppingListTestDB;create=true", "pdc", "pdc");  
+             }
+
+            Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = statement.executeQuery("SELECT * FROM Products");
+
+            if (rs.next() == false)
+            {
+                currID = 1;
+            }
+            else
+            {
+                rs.last();
+                currID = rs.getInt("itemid") + 1;
+                
+                rs.beforeFirst();
+                while (rs.next())
+                {
+                    if (rs.getString("name").equalsIgnoreCase(name))
+                    {
+                        exists = true;
+                    }
+                }
+            }
+
+            statement.close();
+
+        } 
+        catch (SQLException e)
         {
-            statement = conn.createStatement();
-            statement.executeUpdate("UPDATE UserInfo SET score=" + score + " WHERE userid ='" + username + "'");
+            System.out.println("SQLException: "+e);
         }
-        catch (SQLException ex)
+        
+        if (!exists)
         {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                   
+            try {
+                Statement statement = conn.createStatement();       
+                statement.executeUpdate("INSERT INTO Products "
+                            + "VALUES(" + currID + ",'" + name + "','" + manufacturer + "','" + category + "'," + price+")");
+            }
+            catch (SQLException e)
+            {
+                System.out.println("SQLException: "+e); 
+            }
+ 
+        }
+
+    }
+    
+    
+    public ResultSet getCategory(String category) {
+        
+        ResultSet rs = null;
+        
+        try {
+            Statement statement = conn.createStatement();
+            rs = statement.executeQuery("SELECT name, manufacturer, category, price FROM Products WHERE CATEGORY = '"+category+"'");
+
+        }
+        catch (SQLException e)
+        {
+            System.out.println("SQL Exception: "+ e);
+        }
+        
+                    
+        return rs;
+    }
+    
+    public void closeConnections() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }
