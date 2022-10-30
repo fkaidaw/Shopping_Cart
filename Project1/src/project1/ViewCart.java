@@ -17,12 +17,30 @@ public class ViewCart extends javax.swing.JFrame
 {
 
     /**
+     * @return the productList
+     */
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
+    /**
+     * @param productList the productList to set
+     */
+    public void setProductList(ArrayList<Product> productList) {
+        this.productList = productList;
+    }
+    
+    private ArrayList<Product> productList;
+    
+    
+
+    /**
      * Creates new form ViewCart
      */
     public ViewCart()
     {
         initComponents();
-        ArrayList<Product> productList = Cart.getCartInstance().getInCart();
+         this.productList = Cart.getCartInstance().getInCart();
         
         DefaultListModel listModel = new DefaultListModel();
         for (int i = 0; i < productList.size(); i++)

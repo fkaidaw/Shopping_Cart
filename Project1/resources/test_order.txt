@@ -1,4 +1,6 @@
-Chicken Nibbles Manufacturer: Tegels Price: $12.99
+Chicken Drumsticks Manufacturer: Bostocks Price: $12.99
+Green Apple Manufacturer: Granny Smith Price: $2.99
+Beef Mince Manufacturer:  Farmland Price: $7.99
 
 
-Total: $12.99
+Total: $23.97

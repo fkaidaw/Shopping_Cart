@@ -26,6 +26,8 @@ public class Database
     String dbusername = "pdc";
     String dbpassword = "pdc";
     
+    
+    
     //constructor method
     private static Database databaseInstance;
     public Database()
@@ -85,11 +87,12 @@ public class Database
             if (rs.next())
             {
                 System.out.println(username + "***");
-                System.out.println("Found user - Logging in");
+                System.out.println("Found user");
                 
                 String pass = rs.getString("password");
                 if (password.equals(pass)) 
                 {
+                    System.out.println("Logging in");
                    data.loginFlag = true;
                 }
                 else 

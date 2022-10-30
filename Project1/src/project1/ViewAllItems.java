@@ -14,6 +14,34 @@ import javax.swing.DefaultListModel;
  */
 public class ViewAllItems extends javax.swing.JFrame
 {
+
+    /**
+     * @return the productList
+     */
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
+    /**
+     * @param productList the productList to set
+     */
+    public void setProductList(ArrayList<Product> productList) {
+        this.productList = productList;
+    }
+
+    /**
+     * @return the displayList
+     */
+    public ArrayList<Product> getDisplayList() {
+        return displayList;
+    }
+
+    /**
+     * @param displayList the displayList to set
+     */
+    public void setDisplayList(ArrayList<Product> displayList) {
+        this.displayList = displayList;
+    }
    private ArrayList<Product> productList = new ArrayList<Product>();
    private ArrayList<Product> displayList = new ArrayList<Product>();
 
@@ -49,7 +77,7 @@ public class ViewAllItems extends javax.swing.JFrame
     {
         ArrayList<Product> searchResult = new ArrayList<Product>();
         
-        for (Product p : productList)
+        for (Product p : getProductList())
         {
             if (p.search(query))
             {
@@ -300,14 +328,14 @@ public class ViewAllItems extends javax.swing.JFrame
     private void addToCartButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addToCartButtonActionPerformed
     {//GEN-HEADEREND:event_addToCartButtonActionPerformed
         int index = itemList.getSelectedIndex();
-        Product selectedProduct = displayList.get(index);
+        Product selectedProduct = getDisplayList().get(index);
         Cart.getCartInstance().add(selectedProduct);
     }//GEN-LAST:event_addToCartButtonActionPerformed
 
     private void meatButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_meatButtonActionPerformed
     {//GEN-HEADEREND:event_meatButtonActionPerformed
         itemList.removeAll();
-        displayList.clear();
+        getDisplayList().clear();
         MeatReader meatReader = new MeatReader();
         ArrayList<Product> meatList = meatReader.getMeats();
         
@@ -315,7 +343,7 @@ public class ViewAllItems extends javax.swing.JFrame
         for (int i = 0; i < meatList.size(); i++)
         {
             listModel.addElement(meatList.get(i));
-            displayList.add(meatList.get(i));
+            getDisplayList().add(meatList.get(i));
         }
         itemList.setModel(listModel);
     }//GEN-LAST:event_meatButtonActionPerformed
@@ -323,13 +351,13 @@ public class ViewAllItems extends javax.swing.JFrame
     private void allItemsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_allItemsActionPerformed
     {//GEN-HEADEREND:event_allItemsActionPerformed
         itemList.removeAll();
-        displayList.clear();
+        getDisplayList().clear();
 
         DefaultListModel listModel = new DefaultListModel();
-        for (int i = 0; i < productList.size(); i++)
+        for (int i = 0; i < getProductList().size(); i++)
         {
-            listModel.addElement(productList.get(i));
-            displayList.add(productList.get(i));
+            listModel.addElement(getProductList().get(i));
+            getDisplayList().add(getProductList().get(i));
         }
         itemList.setModel(listModel);
     }//GEN-LAST:event_allItemsActionPerformed
@@ -337,7 +365,7 @@ public class ViewAllItems extends javax.swing.JFrame
     private void vegetableButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_vegetableButtonActionPerformed
     {//GEN-HEADEREND:event_vegetableButtonActionPerformed
         itemList.removeAll();
-        displayList.clear();
+        getDisplayList().clear();
 
         VegetableReader vegetableReader = new VegetableReader();
         ArrayList<Product> vegetableList = vegetableReader.getVegetable();
@@ -346,7 +374,7 @@ public class ViewAllItems extends javax.swing.JFrame
         for (int i = 0; i < vegetableList.size(); i++)
         {
             listModel.addElement(vegetableList.get(i));
-            displayList.add(vegetableList.get(i));
+            getDisplayList().add(vegetableList.get(i));
         }
         itemList.setModel(listModel);
     }//GEN-LAST:event_vegetableButtonActionPerformed
@@ -355,13 +383,13 @@ public class ViewAllItems extends javax.swing.JFrame
     {//GEN-HEADEREND:event_fruitButtonActionPerformed
         FruitReader fruitReader = new FruitReader();
         ArrayList<Product> fruitList = fruitReader.getFruit();
-        displayList.clear();
+        getDisplayList().clear();
         
         DefaultListModel listModel = new DefaultListModel();
         for (int i = 0; i < fruitList.size(); i++)
         {
             listModel.addElement(fruitList.get(i));
-            displayList.add(fruitList.get(i));
+            getDisplayList().add(fruitList.get(i));
         }
         itemList.setModel(listModel);
     }//GEN-LAST:event_fruitButtonActionPerformed
