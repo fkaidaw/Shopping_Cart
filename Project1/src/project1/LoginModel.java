@@ -18,11 +18,13 @@ public class LoginModel extends Observable
     public int answer = 0;
     public String username;
     
+    //default constructor for LoginModel
     public LoginModel()
     {
         this.db = Database.getDatabaseInstance();
     }
 
+    //method to check the name a user has entrered and log them in if password matches
     public void checkName(String username, String password)
     {
         this.username = username;
@@ -53,8 +55,4 @@ public class LoginModel extends Observable
 
     }
     
-    public void quitGame()
-    {
-        System.exit(0);
-    }
 }

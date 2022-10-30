@@ -42,7 +42,7 @@ public class FruitReader
         }
     }
      
-    //gets vegetable from vegetable file
+    //gets vegetable from vegetable table in the database
      public ArrayList<Product> getFruit()
     {
         ArrayList<Product> fruitList = Reader.getCategory("Fruit");

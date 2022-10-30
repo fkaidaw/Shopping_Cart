@@ -26,12 +26,14 @@ public class Database
     String dbusername = "pdc";
     String dbpassword = "pdc";
     
+    //constructor method
     private static Database databaseInstance;
     public Database()
     { 
       
     }
     
+    //method to return a database object
     public static synchronized Database getDatabaseInstance()
     {
         if(databaseInstance == null)
@@ -41,6 +43,7 @@ public class Database
         return databaseInstance;
     }
     
+    //method to setup the database and connection
     public void dbsetup()
     {
         try
@@ -70,6 +73,7 @@ public class Database
         }
     }
 
+    //,method to check if a username exists and if it matches the password
     public Data checkName(String username, String password)
     {
         Data data = new Data();
@@ -122,6 +126,7 @@ public class Database
         return data;
     }
 
+    //checks if a table exists in the database
     public boolean checkTableExisting(String newTableName)
     {
         boolean flag = false;
@@ -215,7 +220,7 @@ public class Database
 
     }
     
-    
+    //returns a resultset for the products in a specified category
     public ResultSet getCategory(String category) {
         
         ResultSet rs = null;
@@ -234,6 +239,7 @@ public class Database
         return rs;
     }
     
+    //closes the connection
     public void closeConnections() {
         if (conn != null) {
             try {
