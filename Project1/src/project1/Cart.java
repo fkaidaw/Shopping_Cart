@@ -65,15 +65,13 @@ public class Cart {
     {
         return inCart;
     }
-
-    //method to remove a product from the cart
-    public void remove(Product p) {
-        this.inCart.remove(p);
-    }
     
-    
+    //method to remove item from the 
     public void remove(int index) {
-        this.inCart.remove(index);
+        if (!this.inCart.isEmpty())
+        {
+            this.inCart.remove(index); 
+        }
     }
     
     //prints out the contents of the cart ArrayList and the total price

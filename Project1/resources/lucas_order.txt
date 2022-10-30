@@ -1,4 +1,4 @@
-Cart contents:
-Cart is empty
+Beef Mince Manufacturer:  Farmland Price: $7.99
 
-Total: $0.0
+
+Total: $7.99

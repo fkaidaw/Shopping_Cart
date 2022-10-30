@@ -47,6 +47,7 @@ public class Receipt
         return output;
     }
     
+    //print the receipt to a text file
     public void printToFile(String receipt)
     {
         fileio.printReceipt(receipt);

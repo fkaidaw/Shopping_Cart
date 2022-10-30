@@ -38,9 +38,6 @@ public class Purchase extends javax.swing.JFrame
                  receipt.addProduct(cartProducts.get(i));
              }
 
-            System.out.println(Cart.getCartInstance());
-            receipt.printToFile(Cart.getCartInstance().toString());
-
             receipt.saveOrder("TEST", Cart.getCartInstance().toString());
 
         }
@@ -61,6 +58,9 @@ public class Purchase extends javax.swing.JFrame
         listModel.addElement("");
         listModel.addElement("Total: " + Cart.getCartInstance().getTotal());
         itemList.setModel(listModel);
+        
+        productList.removeAll(productList);
+        
     }
 
     /**

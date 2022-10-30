@@ -35,14 +35,14 @@ public class ShopApp {
         for (int i = 0; i < productList.size(); i++) {
             shop1.addProducts(productList.get(i));
         }
+        
+        System.out.println("Please enter username and password to login, if a new username is entered a new profile will be created");
 
         LoginScreen loginScreen = new LoginScreen();
         loginScreen.setVisible(true);
         LoginModel loginModel = new LoginModel();
         LoginController loginController = new LoginController(loginScreen, loginModel);
     
-//        //display the menu for the shop
-//        shop1.mainMenu();
 
     }
 }

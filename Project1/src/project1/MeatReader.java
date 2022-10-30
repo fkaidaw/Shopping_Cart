@@ -35,8 +35,10 @@ public class MeatReader
             String name = values[0];
             String manufacturer = values[1];
             double price = Double.parseDouble(values[2]);
+            
+            String category = "Meat";
 
-            Reader.insertData(name, manufacturer, "Meat", price);
+            Reader.insertData(name, manufacturer, category, price);
         }
     }
      

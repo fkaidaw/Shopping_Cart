@@ -16,5 +16,6 @@ public class Vegetable extends Product
         this.setName(name);
         this.setManufacturer(manufacturer);
         this.setPrice(price);
+        this.setCategory("Vegetable");
     }
 }

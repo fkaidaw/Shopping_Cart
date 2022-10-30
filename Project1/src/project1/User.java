@@ -86,47 +86,6 @@ public class User {
   
 }
     
-    public int displayUser() {
-        System.out.println("User Information:");
-        System.out.println("Username: "+this.getUsername()+" User ID: "+this.id);
-        System.out.println("\nLast Order:");
-        
-        this.getLastOrder();
-
-        boolean valid = true;
-        
-        int input = 0;
-        
-        do {
-         
-        System.out.println("\nWould you like to:\n1.Return to main menu\n2.Exit");
-            
-            valid = true;
-            
-            try {
-
-                input = scan.nextInt();
-
-                switch (input) {
-                    case 1:
-                        return 1;
-                    case 2:
-                        return 2;
-                    default:
-                        System.out.println("Invalid input");
-                        valid = false;
-
-                }
-            } catch (Exception e)
-            {
-                System.out.println("Invalid input. Please try again.");
-                scan.next();
-            }   
-        } while (input < 1 || input > 2 || valid == false);
-        return 2;
-        
-        
-    }
     
     //method to get the users last order
     public void getLastOrder() {

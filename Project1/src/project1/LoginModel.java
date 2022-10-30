@@ -33,10 +33,24 @@ public class LoginModel extends Observable
         this.setChanged();
         this.notifyObservers(this.data);
         
-        HomeScreen homeview = new HomeScreen();
-        homeview.setVisible(true);
-        HomeModel homemodel = new HomeModel();
-        HomeController homeController = new HomeController(homeview, homemodel);
+        if (this.data.loginFlag == true)
+        {
+            HomeScreen homeview = new HomeScreen();
+            homeview.setVisible(true);
+            HomeModel homemodel = new HomeModel();
+            HomeController homeController = new HomeController(homeview, homemodel);
+        }
+        else
+        {
+            System.out.println("Incorrect Password. Please try again");
+            
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.setVisible(true);
+            LoginModel loginModel = new LoginModel();
+            LoginController loginController = new LoginController(loginScreen, loginModel);
+        }
+
+
     }
     
     public void quitGame()

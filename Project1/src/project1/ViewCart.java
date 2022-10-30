@@ -185,11 +185,17 @@ public class ViewCart extends javax.swing.JFrame
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_removeButtonActionPerformed
     {//GEN-HEADEREND:event_removeButtonActionPerformed
-        int selectedItem = itemList.getSelectedIndex();
-        DefaultListModel listModel = (DefaultListModel) itemList.getModel();
-        listModel.remove(selectedItem);
-        
-        Cart.getCartInstance().remove(selectedItem);
+        try {
+            int selectedItem = itemList.getSelectedIndex();
+            DefaultListModel listModel = (DefaultListModel) itemList.getModel();
+            listModel.remove(selectedItem);
+
+            Cart.getCartInstance().remove(selectedItem);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            
+        }
+
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_purchaseButtonActionPerformed

@@ -116,7 +116,6 @@ public class FileIO {
 
             while ((line=inputStream.readLine())!=null)
             {
-                System.out.println(line);
                 order.add(line);
             }
 

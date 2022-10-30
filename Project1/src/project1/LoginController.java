@@ -36,7 +36,6 @@ public class LoginController implements ActionListener
                 break;
             case "Exit":
                 this.view.dispose();
-//                this.model.quitGame();
                 break;
             default:
                 break;

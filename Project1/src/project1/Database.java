@@ -80,10 +80,10 @@ public class Database
                     + "WHERE username = '" + username + "'");
             if (rs.next())
             {
-                String pass = rs.getString("password");
                 System.out.println(username + "***");
-                System.out.println("found user");
-
+                System.out.println("Found user - Logging in");
+                
+                String pass = rs.getString("password");
                 if (password.equals(pass)) 
                 {
                    data.loginFlag = true;
@@ -109,7 +109,7 @@ public class Database
                 
                 rs.beforeFirst();
                 
-                System.out.println("no such user");
+                System.out.println("No current user exists with this username - New user created");
                 statement.executeUpdate("INSERT INTO UserInfo "
                         + "VALUES(" + currID + ", '" + username + "','" + password + "')");
                 data.loginFlag = true;

@@ -18,12 +18,12 @@ import java.util.ArrayList;
 //Creating meat objects 
 public class Meat extends Product
 {
-    private double weight = 0.00;
     
     public Meat(String name, String manufacturer, double price)
     {
         this.setName(name);
         this.setManufacturer(manufacturer);
         this.setPrice(price);
+        this.setCategory("Meat");
     }
 }
