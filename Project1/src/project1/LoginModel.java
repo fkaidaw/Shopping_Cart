@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author fahim
+ * @author fahim & lucasspain
  */
 public class LoginModel extends Observable
 {

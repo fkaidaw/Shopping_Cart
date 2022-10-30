@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author fahim
+ * @author fahim & lucasspain
  */
 public class Database
 {
