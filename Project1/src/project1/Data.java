@@ -8,12 +8,9 @@ package project1;
  *
  * @author fahim
  */
-public class Test extends Product
+public class Data
 {
-    public Test(String name, String manufacturer, double price)
-    {
-        this.setName(name);
-        this.setManufacturer(manufacturer);
-        this.setPrice(price);
-    }
+    boolean loginFlag = false; // Check if the user successfully login to the system
+    boolean quitFlag = false; // Check if the user quit the system
 }
+

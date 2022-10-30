@@ -12,45 +12,41 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fahim
+ * @author lucasspain & Fahim
  */
+// file reader for vegetable 
 public class VegetableReader
 {
+    public VegetableReader(){
+        insertVegetables();
+    }
+    
+    //gets vegetables from vegetable file and puts into database
+     public void insertVegetables()
+    {
+        String fileName = "./resources/Vegetable.txt";
+        
+        FileIO fileIO = new FileIO();
+        ArrayList<String> fileLines = fileIO.readFile(fileName);
+        
+        for (int i = 0; i < fileLines.size(); i++)
+        {
+            String[] values = fileLines.get(i).split(",", 3);
+            String name = values[0];
+            String manufacturer = values[1];
+            double price = Double.parseDouble(values[2]);
+            
+            String category = "Vegetable";
+
+            Reader.insertData(name, manufacturer, category, price);
+        }
+    }
+     
+    //gets vegetable from product database
      public ArrayList<Product> getVegetable()
     {
-        ArrayList<Product> vegetableList = new ArrayList<Product>();
-        
-        String fileName = "";
-	try
-	{
-            FileReader fr = new FileReader("./resources/Vegetable.txt");
-            BufferedReader inputStream = new BufferedReader(fr);
-
-            String line = null;
-            line = inputStream.readLine();
-
-            while(line != null)
-            {
-                String[] values = line.split(",", 3);
-                String name = values[0];
-                String manufacturer = values[1];
-                double price = Double.parseDouble(values[2]);
-                
-                Vegetable vegetable = new Vegetable(name, manufacturer, price);
-                vegetableList.add(vegetable);
-                
-                line = inputStream.readLine();
-            }
-            inputStream.close(); 
-	}
-	catch(FileNotFoundException e)
-	{
-            System.out.println("File not found.");
-	}
-	catch(IOException e)
-	{
-            System.out.println("Error reading from file" + fileName);
-	}
+        ArrayList<Product> vegetableList = Reader.getCategory("Vegetable");
         return vegetableList;
     }
+     
 }

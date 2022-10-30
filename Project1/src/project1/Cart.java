@@ -6,13 +6,33 @@ package project1;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 //class for the shopping cart - used to keep track of the products the user will buy
 public class Cart {
+    
+    private static Cart cartInstance;
+    private Cart()
+    { 
+        this.inCart = new ArrayList();
+        this.total = 0;
+    }
+    
+    public static synchronized Cart getCartInstance()
+    {
+        if(cartInstance == null)
+        {
+            cartInstance = new  Cart();
+        }
+        return cartInstance;
+    }
+    
     //instance variables
     private ArrayList<Product> inCart;
     private float total;
@@ -21,6 +41,10 @@ public class Cart {
      * @return the total
      */
     public float getTotal() {
+        total = 0.0f;
+        for (Product p : this.inCart) {
+            this.setTotal((float) (total + p.getPrice()));
+        }
         return total;
     }
 
@@ -31,25 +55,28 @@ public class Cart {
         this.total = total;
     }
     
-    //default constructor, creates an Arraylist of products and sets total price to 0
-    public Cart() {
-        this.inCart = new ArrayList();
-        this.total = 0;
-    }
-    
     //method to add a product to the cart
     public void add(Product p) {
         this.inCart.add(p);
     }
+
+    //method to get the cart
+    public ArrayList<Product> getInCart()
+    {
+        return inCart;
+    }
     
-    //method to remove a product from the cart
-    public void remove(Product p) {
-        this.inCart.remove(p);
+    //method to remove item from the 
+    public void remove(int index) {
+        if (!this.inCart.isEmpty())
+        {
+            this.inCart.remove(index); 
+        }
     }
     
     //prints out the contents of the cart ArrayList and the total price
     public String toString() {
-        String output = "Cart contents:\n";
+        String output = "";
         
         if (this.inCart.size() == 0) {
             output += "Cart is empty";
@@ -65,10 +92,8 @@ public class Cart {
         }
 
         output += "\n\nTotal: $"+this.getTotal();
+        this.setTotal(0);
         
         return output;
-        
     }
-    
-    
 }

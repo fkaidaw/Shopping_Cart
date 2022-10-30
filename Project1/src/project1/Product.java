@@ -6,17 +6,17 @@ package project1;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 //product is an abstract class - can be extended into different categories of products that will be listed on the store
 public abstract class Product implements Comparable<Product>{
-    
+
     //encapsulated instance varaiables for a Product object
     private String name;
     private String manufacturer;
+    private String category;
     private double price;
-    private int stock;
     
     //get and set methods for instance variables
 
@@ -47,6 +47,21 @@ public abstract class Product implements Comparable<Product>{
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
+    
+        /**
+     * @return the category
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
 
     /**
      * @return the price
@@ -60,20 +75,6 @@ public abstract class Product implements Comparable<Product>{
      */
     public void setPrice(double price) {
         this.price = price;
-    }
-    
-        /**
-     * @return the stock
-     */
-    public int getStock() {
-        return stock;
-    }
-
-    /**
-     * @param price the price to set
-     */
-    public void setStock(int stock) {
-        this.stock = stock;
     }
     
     //method to check if a query matches the name or manufacturer of a product
@@ -92,11 +93,11 @@ public abstract class Product implements Comparable<Product>{
             
     //toString method, prints out name, manufacturer, and price
     public String toString() {
-        String output = "Product: " + this.name + " Manufacturer: "+this.manufacturer + " Price: $"+this.price;
+        String output = this.name + " Manufacturer: "+this.manufacturer + " Price: $"+this.price;
         
         return output;
     }
-    
+    //override for comparing products 
     @Override
     public int compareTo(Product p) {
         return this.getName().compareTo(p.getName());

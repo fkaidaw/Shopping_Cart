@@ -13,119 +13,41 @@ import java.util.Scanner;
 
 /**
  *
- * @author lucasspain
+ * @author lucasspain & Fahim
  */
 
 //class for user login in the shop app, users are stored in a hashmap that is read from a file
 public class User {
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
     
     //private instance variables for a user object
     private HashMap users;
     private String username;
+    private int id;
+    private FileIO fileio = new FileIO();
     
-    private Scanner scan = new Scanner(System.in);
-        
-    
-    //method to get username input from user to log them in - need to add try catch here
-    public void login() {
-        
-        System.out.println("Please enter your username");
-        String username = scan.nextLine();
-        
-        this.username = username;
-       
+    //method to get the users last order
+    public void getLastOrder() {
+        this.fileio.userLastOrder(this.getUsername());
     }
     
-    
-    //constructor method for a user, should check the file to see if the user already exists
-    public User() {
-        this.login();
+    //method to save the program users to a text file
+    public void save() {
         
-        this.readUsers();
-  
-}
-    //method to read the users from a text file into a hashmap
-    public void readUsers() {
-        
-        this.users = new HashMap();
-        
-        try {
-            FileReader fr = new FileReader("./resources/shop_users.txt"); 
-            BufferedReader inputStream = new BufferedReader(fr);
-
-            String line = null;
-
-            while ((line=inputStream.readLine())!=null)
-            {
-                String[] split = line.split(" ");
-
-                String name = split[0].trim();
-                int score = Integer.parseInt(split[1].trim());
-
-                users.put(name, score);
-            }
-                
-                Set eSet = users.entrySet();
-                Iterator it = eSet.iterator();
-                
-                while (it.hasNext())
-                {
-                    Map.Entry entry = (Map.Entry) it.next();
-                    String key = (String) entry.getKey();
-
-
-                    if (this.username.equals(key))
-                    {
-                        
-                    }
-                }
-
-            
-            inputStream.close();
-   
-        }
-        catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (IOException e) {
-            System.out.println("Error reading from file");
-        }
-            
-    }
-    // Talk to Lucas about removing the below code
-    //method to write users in the hashmap to a text file
-    public void writeUsers() {
-        
-        users.put(this.username, 1);
-        
-        PrintWriter pw = null;
-
-        try {
-            pw = new PrintWriter(new FileOutputStream("./resources/shop_users.txt"));
-
-            Set eSet = users.entrySet();
-            Iterator it = eSet.iterator();
-            
-            
-            while (it.hasNext())
-            {
-                Map.Entry entry = (Map.Entry) it.next();
-                
-                String key = (String) entry.getKey();
-                Integer value = (Integer) entry.getValue();
-                
-                pw.write(key+" "+value);
-                pw.write("\n");
-
-            }
-            
-            pw.close();
-
-        }
-        catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        
+        this.fileio.writeUsers(this.users);
     }
 
     

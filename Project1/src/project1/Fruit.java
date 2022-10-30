@@ -6,8 +6,9 @@ package project1;
 
 /**
  *
- * @author fahim
+ * @author lucasspain & Fahim
  */
+//Creating fruit objects
 public class Fruit extends Product
 {
     public Fruit(String name, String manufacturer, double price)
@@ -15,5 +16,6 @@ public class Fruit extends Product
         this.setName(name);
         this.setManufacturer(manufacturer);
         this.setPrice(price);
+        this.setCategory("Fruit");
     }
 }
